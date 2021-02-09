@@ -1,14 +1,14 @@
 #!/bin/bash
 
-mkdir /tmp/upload
-
 mkdir /tmp/chall
 
-test="$(ls /tmp/upload | grep .\zip$ |head -1| sed -n 's/.zip//p')"
+test="$(ls backend/public/files/ | grep .\zip$ |head -1| sed -n 's/.zip//p')"
+
+mv backend/public/files/${test}.zip /tmp/chall
 
 mkdir /tmp/chall/${test}
 
-unzip /tmp/upload/${test}.zip -d /tmp/chall/${test}
+unzip /tmp/chall/${test}.zip -d /tmp/chall/${test}
 
 #vagrant init /tmp/chall/${test}/
 
