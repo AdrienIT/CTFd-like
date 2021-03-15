@@ -40,9 +40,10 @@ if(isset($_FILES['user_file'])){
 
         //Move the file using PHP's move_uploaded_file function.
         $move = move_uploaded_file($tmpLocation, $newLocation);
-        header('Location: index.php');
-        exit;
+  
     }    
+    header('Location: index.php');
+    exit;
 
 }
 ?>
