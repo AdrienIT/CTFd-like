@@ -1,7 +1,8 @@
 <?php
 //The folder that our file should be moved to
 //once it is uploaded
-$uploadDirectory = '/var/www/html/uploads/';
+$uploadDirectory = 'upload/';
+// $uploadDirectory = '/var/www/html/uploads/';
 
 //If our uploaded file exists.
 if(isset($_FILES['user_file'])){
