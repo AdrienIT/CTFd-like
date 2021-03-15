@@ -1,26 +1,18 @@
-<?php
-session_start(); 
-?>
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>PHP File Upload</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
 <body>
-  <?php
-    if (isset($_SESSION['message']) && $_SESSION['message'])
-    {
-      echo '<p class="notification">'.$_SESSION['message']).'</p>';
-      unset($_SESSION['message']);
-    }
-  ?>
-  <form method="POST" action="upload.php" enctype="multipart/form-data">
-    <div class="upload-wrapper">
-      <span class="file-name">Choose a file...</span>
-      <label for="file-upload">Browse<input type="file" id="file-upload" name="uploadedFile"></label>
-    </div>
- 
-    <input type="submit" name="uploadBtn" value="Upload" />
-  </form>
+<form action="upload-script.php" method="post" enctype="multipart/form-data">
+    <label for="user_file">choisir fichier a upload</label>
+    <input type="file" name="user_file" id="user_file">
+    <input type="submit" value="Upload">
+</form>
 </body>
 </html>
+
