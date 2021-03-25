@@ -36,9 +36,9 @@ if (isset($_POST["username"]) && isset($_POST["email"]) && isset($_POST["passwor
 	else {
         $token = bin2hex(random_bytes(12));
 
-        $to = "polobtzdu64@gmail.com";
+        $to = $email;
         $subject = "véfication de compte";
-        $body = "http://localhost:8080/ctfd/Lepaule/verifToken.php?token=$token";
+        $body = "http://localhost:8080/ctfd/verifToken.php?token=$token";
         $headers = "From: <ctfdlike@gmail.com>" . "\r\n";
         mail($to, $subject, $body, $headers);
 
