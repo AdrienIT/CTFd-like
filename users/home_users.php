@@ -1,12 +1,33 @@
 <?php 
 require '../bdd.php';
 session_start();
+
+if (!isset($_SESSION["connected"])) {
+    header('location: ../login.php');
+}
+
 $username = $_SESSION['connected'];
+
+$querryIsVerif = $pdo->prepare('SELECT isVerified from users where username = :username');
+$querryIsVerif->bindParam(':username',$username);
+$querryIsVerif->execute();
+$isVerif = $querryIsVerif->fetch();
 
 $querry_get_id = $pdo->prepare('SELECT users_id from users where username = :username');
 $querry_get_id->bindParam(':username',$username);
 $querry_get_id->execute();
 $user_id = $querry_get_id->fetch();
+
+
+
+if (implode($isVerif) != '0') {
+
+    // dit rien ça marche
+}else{
+    // echo "<script type='text/javascript'>alert('votre compte n'as pas été vérifié veuillez vérifié vos mail');</script>";
+    header('Location: ../login.php');
+}
+
 
 ?>
 
