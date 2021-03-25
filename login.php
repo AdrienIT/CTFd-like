@@ -30,7 +30,7 @@ if (isset ($_POST["connexion"])){
 
         if ($query_verif_username->rowCount() > 0 ){
             if ($isVerified = 1){      
-                $username = $_SESSION['connected'];
+                $_SESSION['connected'] = $username;
                 header('Location: ./users/home_users.php');
                 exit;
             }else{
