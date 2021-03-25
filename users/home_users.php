@@ -64,15 +64,19 @@ if (implode($isVerif) != '0') {
         </a><button class="navbar-toggler" data-toggle="collapse">
             <span class="sr-only">Toggle navigation</span>
             <span class="navbar-toggler-icon"></span></button>
-            <div class="float-left float-md-right mt-5 mt-md-0 search-area">
-                <i class="fas fa-search float-left search-icon"></i>
-                <input class="float-left float-sm-right custom-search-input" type="search" placeholder="Type to filter by address" style="padding: 00x;height: 35px;width: 1123px;">
-            </div>
+
+
+            <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;" href="team.php">
+                <i class="fa fa-user" style="height: -5px;width: 13px;padding: 4px;"></i>Team</a>
+
+            <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;" href="challenge.php">
+                <i class="fa fa-file-code-o" style="height: -5px;width: 13px;padding: 4px;"></i>Challenge</a>
+
             <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;width: 80;margin: 0;" href="./profile_users.php">
-            <i class="fa fa-user" style="height: -5px;width: 13px;padding: 4px;"></i>
-            &nbsp; Profile</a>
+                <i class="fa fa-address-card" style="height: -5px;width: 13px;padding: 4px;"></i> &nbsp; Profile</a>
+
             <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;width: 80;margin: 0;" href="../logout.php">
-            <i class="fa fa-sign-in" style="height: -5px;width: 13px;padding: 4px;"></i>&nbsp; LogOut</a></div>
+                <i class="fa fa-sign-in" style="height: -5px;width: 13px;padding: 4px;"></i>&nbsp; LogOut</a></div>
     </nav>
 
         
