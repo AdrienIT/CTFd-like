@@ -1,17 +1,12 @@
 <?php 
 require '../bdd.php';
-require '../function/logout.php';
 session_start();
 $username = $_SESSION['connected'];
-
 
 $querry_get_id = $pdo->prepare('SELECT users_id from users where username = :username');
 $querry_get_id->bindParam(':username',$username);
 $querry_get_id->execute();
 $user_id = $querry_get_id->fetch();
-
-
-
 
 ?>
 
