@@ -8,14 +8,10 @@ if (isset($_POST['register'])){
     header('Location: register.php');
     exit;
 }
-
-
 ?>
 
 <!doctype html>
-
 <html>
-
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="style.css">
@@ -43,10 +39,8 @@ if (isset($_POST['register'])){
             <span class="sr-only">Toggle navigation</span>
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="float-left float-md-right mt-5 mt-md-0 search-area">
-            <i class="fas fa-search float-left search-icon"></i>
-            <input class="float-left float-sm-right custom-search-input" type="search" placeholder="Type to filter by address" style="padding: 00x;height: 35px;width: 1123px;" />
-        </div>
+
+
         <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;" href="register.php">
         <i class="fa fa-sign-in" style="height: -5px;width: 13px;padding: 4px;"></i>
           Register
@@ -54,14 +48,9 @@ if (isset($_POST['register'])){
         <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;width: 80;margin: 0;" href="login.php">
         <i class="fa fa-sign-in" style="height: -5px;width: 13px;padding: 4px;"></i>  
           Login
-    </a>
+        </a>
 </div>
 </nav>
-
-<br>
-
-
-
 </body>
 </html>
 

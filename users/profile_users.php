@@ -1,14 +1,12 @@
 <?php
-session_start();
-$username = $_SESSION['connected'];
-
 require '../bdd.php';
-require '../function/connexion_test.php';
+session_start();
 
-if (!is_connected()){
-    header('Location: connexion.php');
+if (!isset($_SESSION["connected"])) {
+    header('location: ../login.php');
 }
 
+$username = $_SESSION['connected'];
 
 
 $querry_get_info = $pdo->prepare("SELECT email FROM users WHERE username = :username");
