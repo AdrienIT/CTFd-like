@@ -15,6 +15,9 @@ if (isset($_POST["username"]) && isset($_POST["email"]) && isset($_POST["passwor
 	$query_verif_user = $pdo->prepare("SELECT username from users where username = ?");
 	$query_verif_user->execute([$username]);
 
+    $query_verif_user_is_not_admin = $pdo->prepare("SELECT username from admin where username = ?");
+	$query_verif_user_is_not_admin->execute([$username]);
+
     $query_verif_user_admin = $pdo->prepare("SELECT username from admin where username = ?");
 	$query_verif_user_admin->execute([$username]);
 
@@ -28,7 +31,7 @@ if (isset($_POST["username"]) && isset($_POST["email"]) && isset($_POST["passwor
 		echo "<script type='text/javascript'>alert('les deux mot de passes ne correspondent pas');</script>";
 	}
 
-	elseif ($query_verif_user-> rowCount() > 0){
+	elseif ($query_verif_user-> rowCount() > 0 && $query_verif_user_is_not_admin-> rowCount() >0){
 		echo "<script type='text/javascript'>alert('l utilisateur existe déjà');</script>";
 		
 	}

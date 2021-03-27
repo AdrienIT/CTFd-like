@@ -8,14 +8,10 @@ if (isset($_POST['register'])){
     header('Location: register.php');
     exit;
 }
-
-
 ?>
 
 <!doctype html>
-
 <html>
-
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="style.css">
@@ -52,14 +48,9 @@ if (isset($_POST['register'])){
         <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;width: 80;margin: 0;" href="login.php">
         <i class="fa fa-sign-in" style="height: -5px;width: 13px;padding: 4px;"></i>  
           Login
-    </a>
+        </a>
 </div>
 </nav>
-
-<br>
-
-
-
 </body>
 </html>
 
