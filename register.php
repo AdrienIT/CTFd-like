@@ -7,7 +7,7 @@ if (isset($_POST['home'])){
 
 
 if(isset($_POST['create'])){
-    if(!isset($_POST['username']) or !isset($_POST['password_1']) or !isset($_POST["password_2"]) or !isset($_POST["email"])) {
+    if(empty($_POST['username']) or empty($_POST['password_1']) or empty($_POST["password_2"]) or empty($_POST["email"])) {
         echo "<script type='text/javascript'>alert('veuillez remplir tout les champs');</script>";
     }
     else{
