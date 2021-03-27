@@ -1,43 +1,76 @@
 <?php
-require 'bdd.php';
-if (isset($_POST['login'])){
-    header('Location: login.php');
-    exit;
-}
-if (isset($_POST['register'])){
-    header('Location: register.php');
-    exit;
-}
-
-if (isset($_POST['submit'])){
-    $name = htmlspecialchars($_POST['name']);
-    $description = htmlspecialchars($_POST['description']);
-    $categorie = htmlspecialchars($_POST['categorie']);
-    $data = htmlspecialchars($_POST['data']);
-    $hint = htmlspecialchars($_POST['hint']);
-    $flag = htmlspecialchars($_POST['flag']);
 
 
-    $newChall = $pdo->prepare("INSERT INTO challenges (name, categorie, description, data, hint, flag) VALUES (:name, :categorie, :description, :data, :hint, :flag)");
-    $newChall->bindParam(':name',$name);
-    $newChall->bindParam(':categorie',$categorie);
-    $newChall->bindParam(':description',$description);
-    $newChall->bindParam(':data',$data);
-    $newChall->bindParam(':hint',$hint);
-    $newChall->bindParam(':flag',$flag);
-    $newChall->execute();
-
-
-
+function rmdir_recursive($dir) {
+    foreach (scandir($dir) as $file) {
+        if ('.' === $file || '..' === $file)
+            continue;
+        if (is_dir("$dir/$file"))
+            rmdir_recursive("$dir/$file");
+        else
+            unlink("$dir/$file");
+    }
+    rmdir($dir);
 }
 
+if(isset(($_FILES["zip_file"]["name"]))) {
+    $filename = $_FILES["zip_file"]["name"];
+    $source = $_FILES["zip_file"]["tmp_name"];
+    $type = $_FILES["zip_file"]["type"];
 
+    $name = explode(".", $filename);
+    $accepted_types = array('application/zip', 'application/x-zip-compressed', 'multipart/x-zip', 'application/x-compressed');
+    foreach($accepted_types as $mime_type) {
+        if($mime_type == $type) {
+            $okay = true;
+            break;
+        } 
+    }
+
+    $continue = strtolower($name[1]) == 'zip' ? true : false;
+    if(!$continue) {
+        $message = "The file you are trying to upload is not a .zip file. Please try again.";
+    }
+
+  /* PHP current path */
+  $path = dirname(__FILE__).'/';  // absolute path to the directory where zipper.php is in
+  $filenoext = basename ($filename, '.zip');  // absolute path to the directory where zipper.php is in (lowercase)
+  $filenoext = basename ($filenoext, '.ZIP');  // absolute path to the directory where zipper.php is in (when uppercase)
+
+  $targetdir = $path . $filenoext; // target directory
+  $targetzip = $path . $filename; // target zip file
+
+  /* create directory if not exists', otherwise overwrite */
+  /* target directory is same as filename without extension */
+
+  if (is_dir($targetdir))  rmdir_recursive ( $targetdir);
+
+
+  mkdir($targetdir, 0777);
+
+
+  /* here it is really happening */
+
+    if(move_uploaded_file($source, $targetzip)) {
+        $zip = new ZipArchive();
+        $x = $zip->open($targetzip);  // open the zip file to extract
+        if ($x === true) {
+            $zip->extractTo($targetdir); // place in the directory with same name  
+            $zip->close();
+
+            unlink($targetzip);
+	    system('echo '.$targetdir.' > challname');
+        }
+        $message = "Your .zip file was uploaded and unpacked.";
+    } else {    
+        $message = "There was a problem with the upload. Please try again.";
+    }
+}
 ?>
 
+
 <!doctype html>
-
 <html>
-
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="style.css">
@@ -57,11 +90,6 @@ if (isset($_POST['submit'])){
 </head>
 
 <body>
-
-
-
-
-
 <nav class="navbar navbar-light navbar-expand-md sticky-top border rounded float-none navigation-clean-button" style="height: 80px;background-color: #37434d;color: #ffffff;">
     <div class="container-fluid">
         <a class="navbar-brand" href="index.php" style="filter: blur(0px);width: 182px;margin: -18px;">
@@ -70,10 +98,8 @@ if (isset($_POST['submit'])){
             <span class="sr-only">Toggle navigation</span>
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="float-left float-md-right mt-5 mt-md-0 search-area">
-            <i class="fas fa-search float-left search-icon"></i>
-            <input class="float-left float-sm-right custom-search-input" type="search" placeholder="Type to filter by address" style="padding: 00x;height: 35px;width: 1123px;" />
-        </div>
+
+
         <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;" href="register.php">
         <i class="fa fa-sign-in" style="height: -5px;width: 13px;padding: 4px;"></i>
           Register
@@ -81,26 +107,18 @@ if (isset($_POST['submit'])){
         <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;width: 80;margin: 0;" href="login.php">
         <i class="fa fa-sign-in" style="height: -5px;width: 13px;padding: 4px;"></i>  
           Login
-    </a>
-</div>
+        </a>
+    </div>
 </nav>
-<br>
-<br>
+
 <center>
-    <form method="post">
-        <input name="name" placeholder="Nom challenge" type="text"> <br>
-        <input name="description" placeholder="Description" type="text" textarea><br>
-        <input name="categorie" placeholder="Categorie" type="text"> <br>
-        <input name="data" placeholder="Url ou lien du fichier" type="text"><br>
-        <input name="hint" placeholder="Indice" type="text"><br>
-        <input name="flag" placeholder="Flag" type="text"><br>
-        <button name="submit">Créer</button>
-    </form>
-</center>
-<br>
+        <form enctype="multipart/form-data" method="post" action="">
+            <label>Envoyez les fichiers à dockeriser (Le nom du fichier doit correspondre au nom du challenge) <br> <input type="file" name="zip_file" /></label>
+            <br />
+            <input type="submit" name="submit" value="Upload" />
+        </form>
+    </center>
 
-
-
-</body>
 </html>
+
 
