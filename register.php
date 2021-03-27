@@ -5,62 +5,69 @@ if (isset($_POST['home'])){
 	header('Location: index.php');
 }
 
-if (isset($_POST["username"]) && isset($_POST["email"]) && isset($_POST["password_1"]) && isset($_POST["password_2"])){
-	$username = htmlspecialchars($_POST["username"]);
-	$email = htmlspecialchars($_POST["email"]);
-	$password = htmlspecialchars($_POST["password_1"]);
-	$password_test = htmlspecialchars($_POST['password_2']);
 
+if(isset($_POST['create'])){
+    if(!isset($_POST['username']) or !isset($_POST['password_1']) or !isset($_POST["password_2"]) or !isset($_POST["email"])) {
+        echo "<script type='text/javascript'>alert('veuillez remplir tout les champs');</script>";
+    }
+    else{
+    
+        $username = htmlspecialchars($_POST["username"]);
+        $email = htmlspecialchars($_POST["email"]);
+        $password = htmlspecialchars($_POST["password_1"]);
+        $password_test = htmlspecialchars($_POST['password_2']);
+    
+    
+        $query_verif_user = $pdo->prepare("SELECT username from users where username = ?");
+        $query_verif_user->execute([$username]);
+    
+        $query_verif_user_is_not_admin = $pdo->prepare("SELECT username from admin where username = ?");
+        $query_verif_user_is_not_admin->execute([$username]);
+    
+        $query_verif_user_admin = $pdo->prepare("SELECT username from admin where username = ?");
+        $query_verif_user_admin->execute([$username]);
+    
+    
+        
+        $query_verif_mail = $pdo->prepare("SELECT email from users where email = ?");
+        $query_verif_mail->execute([$email]);
+    
+    
+        if ($password !== $password_test) {
+            echo "<script type='text/javascript'>alert('les deux mot de passes ne correspondent pas');</script>";
+        }
+    
+        elseif ($query_verif_user-> rowCount() > 0 && $query_verif_user_is_not_admin-> rowCount() >0){
+            echo "<script type='text/javascript'>alert('l utilisateur existe déjà');</script>";
+            
+        }
+        elseif ($query_verif_mail->rowCount()>0){
+            echo "<script type='text/javascript'>alert('cette email est déjà utilisé');</script>";
+        
+        }
+        
+        else {
+            $token = bin2hex(random_bytes(12));
+    
+            $to = $email;
+            $subject = "véfication de compte";
+            $body = "http://localhost:8080/ctfd/verifToken.php?token=$token";
+            $headers = "From: <ctfdlike@gmail.com>" . "\r\n";
+            mail($to, $subject, $body, $headers);
+    
+            $password = password_hash($password,PASSWORD_BCRYPT);
+            $query_add = $pdo->prepare("INSERT INTO users (username, email, password, token) VALUES(:username, :email, :password ,:token)");
+            $query_add->bindparam(":username", $username);
+            $query_add->bindparam(":email", $email);
+            $query_add->bindparam(":password", $password);
+            $query_add->bindparam(":token", $token);
+            $query_add->execute();
+            header('Location: ./login.php');
+            exit;
+        }
+    }
 
-	$query_verif_user = $pdo->prepare("SELECT username from users where username = ?");
-	$query_verif_user->execute([$username]);
-
-    $query_verif_user_is_not_admin = $pdo->prepare("SELECT username from admin where username = ?");
-	$query_verif_user_is_not_admin->execute([$username]);
-
-    $query_verif_user_admin = $pdo->prepare("SELECT username from admin where username = ?");
-	$query_verif_user_admin->execute([$username]);
-
-
-	
-	$query_verif_mail = $pdo->prepare("SELECT email from users where email = ?");
-	$query_verif_mail->execute([$email]);
-
-
-	if ($password !== $password_test) {
-		echo "<script type='text/javascript'>alert('les deux mot de passes ne correspondent pas');</script>";
-	}
-
-	elseif ($query_verif_user-> rowCount() > 0 && $query_verif_user_is_not_admin-> rowCount() >0){
-		echo "<script type='text/javascript'>alert('l utilisateur existe déjà');</script>";
-		
-	}
-	elseif ($query_verif_mail->rowCount()>0){
-		echo "<script type='text/javascript'>alert('cette email est déjà utilisé');</script>";
-	
-	}
-	
-	else {
-        $token = bin2hex(random_bytes(12));
-
-        $to = $email;
-        $subject = "véfication de compte";
-        $body = "http://localhost:8080/ctfd/verifToken.php?token=$token";
-        $headers = "From: <ctfdlike@gmail.com>" . "\r\n";
-        mail($to, $subject, $body, $headers);
-
-		$password = password_hash($password,PASSWORD_BCRYPT);
-		$query_add = $pdo->prepare("INSERT INTO users (username, email, password, token) VALUES(:username, :email, :password ,:token)");
-		$query_add->bindparam(":username", $username);
-		$query_add->bindparam(":email", $email);
-		$query_add->bindparam(":password", $password);
-        $query_add->bindparam(":token", $token);
-		$query_add->execute();
-		header('Location: ./login.php');
-        exit;
-	}
 }
-
 
 ?>
 
@@ -120,7 +127,7 @@ if (isset($_POST["username"]) && isset($_POST["email"]) && isset($_POST["passwor
                 <div class="form-group"><input class="form-control" type="password" name="password_1" placeholder="Password"></div>
                 <div class="form-group"><input class="form-control" type="password" name="password_2" placeholder="Password (repeat)"></div>
       
-                <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Création du compte</button></div>
+                <div class="form-group"><button class="btn btn-primary btn-block" type="submit" name="create">Création du compte</button></div>
         </div>
     </div>
 
