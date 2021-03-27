@@ -5,6 +5,11 @@ if (isset ($_POST["connexion"])){
     $username = htmlspecialchars($_POST["username"]);
     $password = htmlspecialchars($_POST["password"]);
 
+    
+    $querry_is_admin = $pdo->prepare('SELECT username from admin where username = :username');
+    $querry_is_admin->bindParam(':username',$username);
+    $querry_is_admin->execute();
+   
     $query_verif_username = $pdo->prepare("SELECT * FROM users WHERE username = :username");
     $query_verif_username->bindParam(':username',$username);
     $query_verif_username->execute();
@@ -14,37 +19,51 @@ if (isset ($_POST["connexion"])){
     $queryAccountVerified->execute();
     $isVerified = $queryAccountVerified->fetch();
   
-
     $query_get_hash = $pdo->prepare("SELECT password FROM users WHERE username = :username");
     $query_get_hash->bindParam(':username',$username);
     $query_get_hash->execute();
     $hash = $query_get_hash->fetch();
 
+    $query_get_hash_admin = $pdo->prepare("SELECT password FROM admin WHERE username = :username");
+    $query_get_hash_admin->bindParam(':username',$username);
+    $query_get_hash_admin->execute();
+    $AdminHash = $query_get_hash_admin->fetch();
 
 
 
-
-
-    if(password_verify($password,implode($hash))){
-
-
-        if ($query_verif_username->rowCount() > 0 ){
-            if ($isVerified = 1){      
-                $_SESSION['connected'] = $username;
-                header('Location: ./users/home_users.php');
-                exit;
-            }else{
-                echo "<script type='text/javascript'>alert('Un email vous a été envoyé, merci de valider votre compte.');</script>";
-            }
-
-    
+    if($querry_is_admin->rowCount() > 0 ){
+        if(empty($AdminHash)){
+            echo "<script type='text/javascript'>alert('Le nom d utilisateur ou le mot de passe ne correspondent pas.');</script>";
+        }
+        if(password_verify($password,implode($AdminHash))){
+            $_SESSION['connected'] = $username;
+            header('Location: ./users/home_users.php');
+            exit;
         }
         else{
-            echo "<script type='text/javascript'>alert('l\'identifiant et le mot de passe ne correspondent pas');</script>";
+            echo "<script type='text/javascript'>alert('Le nom d utilisateur ou le mot de passe ne correspondent pas.');</script>";
         }
 
+    }else{
+        if(empty($hash)){
+            echo "<script type='text/javascript'>alert('Le nom d utilisateur ou le mot de passe ne correspondent pas.');</script>";
+        }
+     
+        elseif(password_verify($password,implode($hash))){
+    
+            if ($query_verif_username->rowCount() > 0 ){
+                if ($isVerified = 1){      
+                    $_SESSION['connected'] = $username;
+                    header('Location: ./users/home_users.php');
+                    exit;
+                }else{
+                    echo "<script type='text/javascript'>alert('Un email vous a été envoyé, merci de valider votre compte.');</script>";
+                }
+            }
+        }
     }
 }
+
 
 
 ?>
@@ -88,9 +107,11 @@ if (isset ($_POST["connexion"])){
             <input class="float-left float-sm-right custom-search-input" type="search" placeholder="Type to filter by address" style="padding: 00x;height: 35px;width: 1123px;" />
         </div>
         <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;width: 80;margin: 0;" href="register.php">
-        <i class="fa fa-sign-in" style="height: -5px;width: 13px;padding: 4px;"></i>  
-          Register
-    </a>
+            <i class="fa fa-sign-in" style="height: -5px;width: 13px;padding: 4px;"></i>Register
+        </a>
+        <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;width: 80;margin: 0;" href="./admin/loginPhp.php">
+            <i class="fa fa-sign-in" style="height: -5px;width: 13px;padding: 4px;"></i>admin login
+        </a>
 </div>
 </nav>
     <div class="register-photo">
