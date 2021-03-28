@@ -37,11 +37,17 @@ if (isset($_GET["name"]) and !empty($_GET["name"])) {
             header('Location: ./dockerLauncher.php');
             exit;
         }
+        elseif($action == 'remove'){
+            shell_exec("sudo docker stop ".$name);   
+            shell_exec("sudo docker rm -f ".$name);  
+            header('Location: ./dockerLauncher.php');
+            exit;
+        }
 
     }
 
 }
-
+sudo docker rm -f $name
 ?>
 
 <!DOCTYPE html>
@@ -107,6 +113,10 @@ if (isset($_GET["name"]) and !empty($_GET["name"])) {
                     <button><a href="dockerLauncher.php?name=<?=$challnametmp;?>&action=start">start</a></button>
                     <button><a href="dockerLauncher.php?name=<?=$challnametmp; ?>&action=stop">stop</a></button>
                     <button><a href="dockerLauncher.php?name=<?=$challnametmp; ?>&action=restart">restart</a></button>
+                    <?php if($challstatus === 'Exited'){ echo("<button><a href=\"dockerLauncher.php?name=<?=$challnametmp; ?>&action=remove\">remove</a></button>");}
+
+?>
+                    
                 </div>
             </div>
             <?php } ?>

@@ -115,7 +115,7 @@ if(isset(($_FILES["zip_file"]["name"]))) {
         <form enctype="multipart/form-data" method="post" action="">
             <label>Envoyez les fichiers à dockeriser (Le nom du fichier doit correspondre au nom du challenge) <br> <input type="file" name="zip_file" /></label>
             <br />
-            <input onclick="window.location.href = 'https://ctfdlike.ml/CTFd-like/admin/dockerLauncher.php';" type="submit" name="submit" value="Upload" />
+            <input type="submit" name="submit" value="Upload" />
         </form>
     </center>
 
