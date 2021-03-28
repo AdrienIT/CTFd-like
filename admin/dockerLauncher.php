@@ -89,7 +89,7 @@ if (isset($_GET["name"]) and !empty($_GET["name"])) {
 
 
             //  foreach($cnf as $container) 
-            foreach (array_combine($cnf, $csf) as $challnametmp => $challstatus =>$challport) {
+            foreach (array_combine($cnf, $csf) as $challnametmp => $challstatus) {
               ?>
                 
                 <div class="card">
