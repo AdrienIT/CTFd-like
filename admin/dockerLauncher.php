@@ -19,16 +19,19 @@ if (isset($_GET["name"]) and !empty($_GET["name"])) {
     if(isset($_GET["action"]) and !empty($_GET["action"])){
         $name = htmlspecialchars($_GET["name"]);
         $action = htmlspecialchars($_GET["action"]);
-        var_dump($name,$action);
 
         if($action == 'start'){
             shell_exec("sudo docker start ".$name);
             echo "<script type='text/javascript'>alert('Votre machine s'est arrétée.');</script>";
+            header('Location: ./dockerLauncher.php');
+            exit;
         }
 
         elseif($action == 'stop'){
             shell_exec("sudo docker stop ".$name);  
             echo "<script type='text/javascript'>alert('Votre machine s'est arrétée.');</script>";
+            header('Location: ./dockerLauncher.php');
+            exit;
         }
         
         elseif($action == 'restart'){
