@@ -97,10 +97,11 @@ if (isset($_GET["name"]) and !empty($_GET["name"])) {
             //  foreach($cnf as $container) 
             foreach (array_combine($cnf, $csf) as $challnametmp => $challstatus) {
               ?>
-                
+                <?php if($challname === ' '){ echo("<p>pop</p>");}?>
                 <div class="card">
                 <div class="card-body">
                     <h4 class="card-title"><?php echo $challnametmp;?></h4>
+                    
                     <h6 class="text-muted card-subtitle mb-2"><?php echo $challstatus;?></h6>
 
                     <?php
