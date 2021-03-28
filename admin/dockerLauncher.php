@@ -27,10 +27,10 @@ if (isset($_GET["name"]) and !empty($_GET["name"])) {
 
             if(in_array($action,$actionArray)){
                 if($action == 'start'){
-                    shell_exec("docker start  `docker ps -a -q --filter 'name=".$name."'`");
+                    shell_exec("sudo docker start  `docker ps -a -q --filter 'name=".$name."'`");
                 }
                 elseif($action == 'stop'){
-                    shell_exec("docker stop ".$name);  
+                    shell_exec("sudo docker stop ".$name);  
                 }
                 elseif($action == 'restart'){
                     //bonus
