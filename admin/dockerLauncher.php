@@ -14,6 +14,40 @@ if($querry_is_admin->rowCount() == 0 ){
     header('Location: ../login.php');
     exit;
 }
+
+if (isset($_GET["name"]) and !empty($_GET["name"])) {
+    if(isset($_GET["action"]) and !empty($_GET["action"])){
+        $name = htmlspecialchars($_GET["name"]);
+        $nameArray= array($challnametmp);
+
+        if (in_array($name,$nameArray)){
+
+            $action = htmlspecialchars($_GET["action"]);
+            $actionArray = array('start','stop','restart');
+
+            if(in_array($action,$actionArray)){
+                if($action == 'start'){
+                    shell_exec("docker start  `docker ps -a -q --filter 'name=".$name."'`");
+                }
+                elseif($action == 'stop'){
+                    shell_exec("docker stop ".$name);  
+                }
+                elseif($action == 'restart'){
+                    //bonus
+                    
+                }
+
+            }else{
+                echo "<script type='text/javascript'>alert('Action inconnue.');</script>";
+            }
+
+        }else{
+            echo "<script type='text/javascript'>alert('Le challenge n'existe pas.');</script>";
+        }
+
+
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -65,8 +99,8 @@ if($querry_is_admin->rowCount() == 0 ){
                 <div class="card-body">
                     <h4 class="card-title"><?php echo $challnametmp;?></h4>
                     <h6 class="text-muted card-subtitle mb-2"><?php echo $challstatus;?></h6>
-                    <button class="btn btn-primary active text-center d-block pull-right" type="button" style="height: 61px;background-color: rgb(0,105,217);"><a href="dockerAction.php?start=<?=$challnametmp;?>">start</a></button>
-                    <button class="btn btn-primary active text-center d-block pull-right" type="button" style="height: 61px;background-color: rgb(0,105,217);"><a href="dockerAction.php?stop=<?=$challnametmp; ?>">stop</a></button>
+                    <button class="btn btn-primary active text-center d-block pull-right" type="button" style="height: 61px;background-color: rgb(0,105,217);"><a href="dockerLauncher.php?name=<?=$challnametmp;?>&action=start">start</a></button>
+                    <button class="btn btn-primary active text-center d-block pull-right" type="button" style="height: 61px;background-color: rgb(0,105,217);"><a href="dockerLauncher.php?name=<?=$challnametmp; ?>&action=stop">stop</a></button>
                 </div>
             </div>
             <?php } ?>
