@@ -79,10 +79,10 @@ if (isset($_GET["name"]) and !empty($_GET["name"])) {
             //  $challnametmp = shell_exec("sudo docker ps -a --format 'table {{.Names}}\t{{.Status}}' | cut -f1 -d '(' | tail -n +2 | awk '{print $1}'");
             $challnametmp = shell_exec("sudo docker ps -a --format 'table {{.Names}}\t{{.Status}}' | cut -f1 -d '(' | tail -n +2 | awk '{print $1}'");
             $challstatus = shell_exec("sudo docker ps -a --format 'table {{.Names}}\t{{.Status}}' | cut -f1 -d '(' | tail -n +2 | awk '{print $2}'");
-            //$challport = shell_exec("docker port ctfdlike | awk -F':' '{print $NF}'");
+            // $challport = shell_exec("sudo docker port ctfdlike | awk -F':' '{print \$NF}'");
             $cnf = explode(PHP_EOL, $challnametmp);
             $csf = explode(PHP_EOL, $challstatus);
-            $cpf = explode(PHP_EOL, $challport);
+            // $cpf = explode(PHP_EOL, $challport);
 
 
 
@@ -97,7 +97,7 @@ if (isset($_GET["name"]) and !empty($_GET["name"])) {
                     <h4 class="card-title"><?php echo $challnametmp;?></h4>
                     <h6 class="text-muted card-subtitle mb-2"><?php echo $challstatus;?></h6>
 
-                    <h6 class="text-muted card-subtitle mb-2"><p>sur le port : </p><?php echo shell_exec("docker port ".$challnametmp." | awk -F':' '{print $NF}'");?></h6>
+                    <h6 class="text-muted card-subtitle mb-2"><p>Url du lien :  </p><a href="146.59.150.242:<?php echo shell_exec("sudo docker port ".$challnametmp."| awk -F':' '{print \$NF}'"); ?>">test</a></h6>
                     <button><a href="dockerLauncher.php?name=<?=$challnametmp;?>&action=start">start</a></button>
                     <button><a href="dockerLauncher.php?name=<?=$challnametmp; ?>&action=stop">stop</a></button>
                     <button><a href="dockerLauncher.php?name=<?=$challnametmp; ?>&action=restart">restart</a></button>
