@@ -102,20 +102,19 @@ sudo docker rm -f $name
                 <div class="card-body">
                     <h4 class="card-title"><?php echo $challnametmp;?></h4>
                     <h6 class="text-muted card-subtitle mb-2"><?php echo $challstatus;?></h6>
-                    <?php 
 
+                    <?php
                     $port = shell_exec("sudo docker port ".$challnametmp."| awk -F':' '{print \$NF}'");
                     if($challstatus === 'Up'){ echo("<h6>Url du lien : <a target=\"_blank\" href=\"http://146.59.150.242:$port \">URL</a></h6>");}
-                    
                     ?>
 
                     
                     <button><a href="dockerLauncher.php?name=<?=$challnametmp;?>&action=start">start</a></button>
                     <button><a href="dockerLauncher.php?name=<?=$challnametmp; ?>&action=stop">stop</a></button>
                     <button><a href="dockerLauncher.php?name=<?=$challnametmp; ?>&action=restart">restart</a></button>
-                    <?php if($challstatus === 'Exited'){ echo("<button><a href=\"dockerLauncher.php?name=<?=$challnametmp; ?>&action=remove\">remove</a></button>");}
+                    <?php if($challstatus !=== 'Up'){ echo("<button><a href=\"dockerLauncher.php?name=<?=$challnametmp; ?>&action=remove\">remove</a></button>");}?>
 
-?>
+
                     
                 </div>
             </div>

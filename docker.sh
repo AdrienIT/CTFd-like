@@ -5,7 +5,8 @@ challnamelow=$(cat /var/www/html/challname | awk -F'/' '{print $NF}' | awk '{pri
 
 echo "$challname"
 
-docker build -t "$challnamelow" /var/www/html/"$challname" && docker run -d --publish-all --name "$challnamelow" "$challnamelow":latest
+sudo docker build -t "$challnamelow" /var/www/html/"$challname" 
+sudo docker run -d --publish-all --name "$challnamelow" "$challnamelow":latest
 port=$(docker port "$challnamelow" | awk -F':' '{print $NF}')
 
 echo "You challenge is running on port : $port"
