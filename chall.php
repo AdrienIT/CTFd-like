@@ -62,7 +62,7 @@ if(isset(($_FILES["zip_file"]["name"]))) {
 	    system('echo '.$targetdir.' > challname');
         }
         $message = "Your .zip file was uploaded and unpacked.";
-        shell_exec('sudo /var/www/html/docker.sh');
+        shell_exec('bash /var/www/html/docker.sh');
     } else {    
         $message = "There was a problem with the upload. Please try again.";
     }
