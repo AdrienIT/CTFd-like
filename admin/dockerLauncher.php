@@ -100,7 +100,7 @@ if (isset($_GET["name"]) and !empty($_GET["name"])) {
 
                     $port = shell_exec("sudo docker port ".$challnametmp."| awk -F':' '{print \$NF}'");
                     var_dump($port);
-                    if($challstatus === 'Up'){ echo("<h6 class=\"text-muted card-subtitle mb-2\"><p>Url du lien :  </p><a target=\"_BLANK\" href=\"http://146.59.150.242:<?php echo $port; ?> >URL</a></h6>");}
+                    if($challstatus === 'Up'){ echo("<h6>Url du lien : <a target=\"_BLANK\" href=\"http://146.59.150.242:<?php echo $port; ?> \">URL</a></h6>");}
                     
                     ?>
 
