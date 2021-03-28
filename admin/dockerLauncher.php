@@ -54,8 +54,8 @@ if($querry_is_admin->rowCount() == 0 ){
             $cnf = explode(PHP_EOL, $challnametmp);
             // $csf = explode(PHP_EOL, $challstatus);
 
-            $challnametmp = array(shell_exec("sudo docker ps -a --format 'table {{.Names}}' | cut -f1 -d '('"););
-            $challstatus = array(shell_exec("sudo docker ps -a --format 'table {{.Status}}' | cut -f1 -d '('"););
+            $challnametmp = array(shell_exec("sudo docker ps -a --format 'table {{.Names}}' | cut -f1 -d '('");
+            $challstatus = array(shell_exec("sudo docker ps -a --format 'table {{.Status}}' | cut -f1 -d '('");
 
 }
 
