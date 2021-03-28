@@ -51,7 +51,7 @@ if($querry_is_admin->rowCount() == 0 ){
             // $challnametmp = shell_exec("sudo docker ps -a --format 'table {{.Names}}\t{{.Status}}' | cut -f1 -d '('");
             // $challnametmp = shell_exec("sudo docker ps -a --format 'table {{.Names}}' | cut -f1 -d '('");
             // $challstatus = shell_exec("sudo docker ps -a --format 'table {{.Status}}' | cut -f1 -d '('");
-            $cnf = explode(PHP_EOL, $challnametmp);
+            // $cnf = explode(PHP_EOL, $challnametmp);
             // $csf = explode(PHP_EOL, $challstatus);
 
             $challnametmp = array(shell_exec("sudo docker ps -a --format 'table {{.Names}}' | cut -f1 -d '('"));
@@ -59,7 +59,7 @@ if($querry_is_admin->rowCount() == 0 ){
 
 
             // foreach(array_slice($cnf, 1) as $container) 
-            foreach($challnametmp as $key => $value) {
+            foreach(array_slice($challnametmp,1) as $key => $value) {
                 ?>
                 
                 <div class="card">
