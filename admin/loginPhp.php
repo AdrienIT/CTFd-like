@@ -28,7 +28,7 @@ if (isset ($_POST["connexion"])){
 
     if(password_verify($password,implode($hash))){
         $_SESSION['connected'] = $username;
-        header('Location: ../users/home_users.php');
+        header('Location: ./homeAdmin.php');
         exit;
     }
 
@@ -77,8 +77,8 @@ if (isset ($_POST["connexion"])){
 <body>
 <nav class="navbar navbar-light navbar-expand-md sticky-top border rounded float-none navigation-clean-button" style="height: 80px;background-color: #37434d;color: #ffffff;">
     <div class="container-fluid">
-        <a class="navbar-brand" href="index.php" style="filter: blur(0px);width: 182px;margin: -18px;">
-        <img src="./assets/img/shoulder_img.png" />   L&#39;Epaule</a>
+        <a class="navbar-brand" href="../index.php" style="filter: blur(0px);width: 182px;margin: -18px;">
+        <img src="../assets/img/shoulder_img.png" />   L&#39;Epaule</a>
         <button class="navbar-toggler" data-toggle="collapse">
             <span class="sr-only">Toggle navigation</span>
             <span class="navbar-toggler-icon"></span>
@@ -87,7 +87,7 @@ if (isset ($_POST["connexion"])){
             <i class="fas fa-search float-left search-icon"></i>
             <input class="float-left float-sm-right custom-search-input" type="search" placeholder="Type to filter by address" style="padding: 00x;height: 35px;width: 1123px;" />
         </div>
-        <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;width: 80;margin: 0;" href="register.php">
+        <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;width: 80;margin: 0;" href="../register.php">
             <i class="fa fa-sign-in" style="height: -5px;width: 13px;padding: 4px;"></i>Register
         </a>
 </div>
