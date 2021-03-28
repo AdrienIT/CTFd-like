@@ -1,10 +1,8 @@
 <?php
 require '../bdd.php';
-session_start();
-if (!isset($_SESSION["connected"])) {
-    header('location: ../login.php');
+if (!isset($_COOKIE[$cookie_admin])) {
+    header('location: ../loginPhp.php');
 }
-$username = $_SESSION['connected'];
 
 $querry_is_admin = $pdo->prepare('SELECT username from admin where username = :username');
 $querry_is_admin->bindParam(':username', $username);

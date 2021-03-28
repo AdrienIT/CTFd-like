@@ -1,6 +1,11 @@
 <?php
 require './bdd.php';
-session_start();
+
+$cookie_user = "connected";
+$cookie_value = 1;
+
+setcookie($cookie_user, $cookie_value, time() + 86400, "/", "localhost", TRUE, TRUE);
+
 if (isset($_POST["connexion"])) {
     $username = htmlspecialchars($_POST["username"]);
     $password = htmlspecialchars($_POST["password"]);

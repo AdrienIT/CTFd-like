@@ -1,7 +1,4 @@
 <?php
-session_start();
-session_unset();
-unset($_SESSION['connected']);
-session_destroy();
+setcookie($cookie_user, $cookie_value, time(time() - 3600));
+setcookie($cookie_admin, $cookie_value, time(time() - 3600));
 header('Location: index.php');
-?>

@@ -1,14 +1,9 @@
 <?php
 require '../bdd.php';
-session_start();
 
-if (!isset($_SESSION["connected"])) {
+if (!isset($_COOKIE[$cookie_user])) {
     header('location: ../login.php');
 }
-
-$username = $_SESSION['connected'];
-
-
 
 $querryIsVerif = $pdo->prepare('SELECT isVerified from users where username = :username');
 $querryIsVerif->bindParam(':username', $username);

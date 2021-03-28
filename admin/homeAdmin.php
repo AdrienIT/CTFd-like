@@ -1,12 +1,9 @@
 <?php
 require '../bdd.php';
-session_start();
 
-if (!isset($_SESSION["connected"])) {
-    header('location: ../login.php');
+if (!isset($_COOKIE[$cookie_admin])) {
+    header('location: ../loginPhp.php');
 }
-
-$username = $_SESSION['connected'];
 
 ?>
 

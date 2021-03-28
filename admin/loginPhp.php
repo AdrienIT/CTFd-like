@@ -1,6 +1,15 @@
 <?php
 require '../bdd.php';
-session_start();
+
+if (isset($_COOKIE[$cookie_admin])) {
+    header('Location: homeAdmin.php');
+};
+
+$cookie_admin = "connected";
+$cookie_value = 1;
+
+setcookie($cookie_admin, $cookie_value, time() + 86400, "/", "localhost", TRUE, TRUE);
+
 // $username = "admin"; //Remplacer par variable env dans .env
 $xpassword = "root"; //Remplacer par variable env dans .env
 
