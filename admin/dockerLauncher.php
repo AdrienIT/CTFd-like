@@ -86,8 +86,11 @@ if (isset($_GET["name"]) and !empty($_GET["name"])) {
             $challnametmp = shell_exec("sudo docker ps -a --format 'table {{.Names}}\t{{.Status}}' | cut -f1 -d '(' | tail -n +2 | awk '{print $1}'");
             $challstatus = shell_exec("sudo docker ps -a --format 'table {{.Names}}\t{{.Status}}' | cut -f1 -d '(' | tail -n +2 | awk '{print $2}'");
             // $challport = shell_exec("sudo docker port ctfdlike | awk -F':' '{print \$NF}'");
-            $cnf = explode(PHP_EOL, $challnametmp);
-            $csf = explode(PHP_EOL, $challstatus);
+            $cnf1 = explode(PHP_EOL, $challnametmp);
+            $csf1 = explode(PHP_EOL, $challstatus);
+
+            $cnf = unset(end($cnf1));
+            $csf = unset(end($csf1));
             // $cpf = explode(PHP_EOL, $challport);
 
 
