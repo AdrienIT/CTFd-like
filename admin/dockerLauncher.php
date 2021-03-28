@@ -19,7 +19,17 @@ if (isset($_GET["name"]) and !empty($_GET["name"])) {
     if(isset($_GET["action"]) and !empty($_GET["action"])){
         $name = htmlspecialchars($_GET["name"]);
         $nameArray= explode(PHP_EOL, $challnametmp);
+        $new = shell_exec("sudo docker ps -a --format 'table {{.Names}}\t{{.Status}}' | cut -f1 -d '(' | tail -n +2 | awk '{print $1}' > psa");
+        if(strpos(file_get_contents($new),$name)!==false){
+            // true
+        }
+        else{
+            echo "<script type='text/javascript'>alert('Challenge non trouvé.');</script>";
+        }
+
+
         var_dump($name,$nameArray);
+
 
         if (in_array($name,$nameArray)){
 
