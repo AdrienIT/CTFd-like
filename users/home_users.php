@@ -8,33 +8,26 @@ if (!isset($_SESSION["connected"])) {
 
 $username = $_SESSION['connected'];
 
-$querry_is_admin = $pdo->prepare('SELECT username from admin where username = :username');
-$querry_is_admin->bindParam(':username',$username);
-$querry_is_admin->execute();
-$isAdmin = $querry_is_admin->fetch();
 
-if (is_array($isAdmin)){
-    $_SESSION['admin'] = 'true';
+
+$querryIsVerif = $pdo->prepare('SELECT isVerified from users where username = :username');
+$querryIsVerif->bindParam(':username',$username);
+$querryIsVerif->execute();
+$isVerif = $querryIsVerif->fetch();
+
+$querry_get_id = $pdo->prepare('SELECT users_id from users where username = :username');
+$querry_get_id->bindParam(':username',$username);
+$querry_get_id->execute();
+$user_id = $querry_get_id->fetch();
+
+if (implode($isVerif) != '0') {
+
+    // dit rien ça marche
+}else{
+    // echo "<script type='text/javascript'>alert('votre compte n'as pas été vérifié veuillez vérifié vos mail');</script>";
+    header('Location: ../login.php');
 }
-else{
-    $querryIsVerif = $pdo->prepare('SELECT isVerified from users where username = :username');
-    $querryIsVerif->bindParam(':username',$username);
-    $querryIsVerif->execute();
-    $isVerif = $querryIsVerif->fetch();
-    
-    $querry_get_id = $pdo->prepare('SELECT users_id from users where username = :username');
-    $querry_get_id->bindParam(':username',$username);
-    $querry_get_id->execute();
-    $user_id = $querry_get_id->fetch();
 
-    if (implode($isVerif) != '0') {
-
-        // dit rien ça marche
-    }else{
-        // echo "<script type='text/javascript'>alert('votre compte n'as pas été vérifié veuillez vérifié vos mail');</script>";
-        header('Location: ../login.php');
-    }
-}
 
 ?>
 
