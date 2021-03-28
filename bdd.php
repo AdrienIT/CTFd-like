@@ -14,9 +14,9 @@ $database_options = [
 
 $pdo = new PDO(
     'mysql:host=' . $database_host .
-    ';port=' . $database_port .
-    ';dbname=' . $database_dbname .
-    ';charset=' . $database_charset,
+        ';port=' . $database_port .
+        ';dbname=' . $database_dbname .
+        ';charset=' . $database_charset,
     $database_user,
     $database_password,
     $database_options
