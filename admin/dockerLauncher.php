@@ -19,11 +19,13 @@ if (isset($_GET["name"]) and !empty($_GET["name"])) {
     if(isset($_GET["action"]) and !empty($_GET["action"])){
         $name = htmlspecialchars($_GET["name"]);
         $nameArray= array($challnametmp);
+        var_dump($name,$nameArray);
 
         if (in_array($name,$nameArray)){
 
             $action = htmlspecialchars($_GET["action"]);
             $actionArray = array('start','stop','restart');
+            var_dump($action,$actionArray);
 
             if(in_array($action,$actionArray)){
                 if($action == 'start'){
