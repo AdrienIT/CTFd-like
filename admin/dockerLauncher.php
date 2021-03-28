@@ -18,48 +18,27 @@ if($querry_is_admin->rowCount() == 0 ){
 if (isset($_GET["name"]) and !empty($_GET["name"])) {
     if(isset($_GET["action"]) and !empty($_GET["action"])){
         $name = htmlspecialchars($_GET["name"]);
-        $nameArray= explode(PHP_EOL, $challnametmp);
-        $new = shell_exec("docker ps -a --format '{{.Names}}' > psa");
-        if(strpos(file_get_contents($new),$name)!==false){
-            // true
-        }
-        else{
-            echo "<script type='text/javascript'>alert('Challenge non trouvé.');</script>";
-        }
+        $action = htmlspecialchars($_GET["action"]);
+        var_dump($name,$action);
 
-
-        var_dump($name,$nameArray);
-
-
-        if (in_array($name,$nameArray)){
-
-            $action = htmlspecialchars($_GET["action"]);
-            $actionArray = array('start','stop','restart');
-            var_dump($action,$actionArray);
-
-            if(in_array($action,$actionArray)){
-                if($action == 'start'){
-                    shell_exec("sudo docker start  `docker ps -a -q --filter 'name=".$name."'`");
-                }
-                elseif($action == 'stop'){
-                    shell_exec("sudo docker stop ".$name);  
-                }
-                elseif($action == 'restart'){
-                    //bonus
-                    
-                }
-
-            }else{
-                echo "<script type='text/javascript'>alert('Action inconnue.');</script>";
-            }
-
-        }else{
-            echo "<script type='text/javascript'>alert('Le challenge n'existe pas.');</script>";
+        if($action == 'start'){
+            // shell_exec("sudo docker start  `docker ps -a -q --filter 'name=".$name."'`");
+            echo "<script type='text/javascript'>alert('Start.');</script>";
         }
 
+        elseif($action == 'stop'){
+            // shell_exec("sudo docker stop ".$name);  
+            echo "<script type='text/javascript'>alert('stop.');</script>";
+        }
+        
+        elseif($action == 'restart'){
+            //bonus  
+        }
 
     }
+
 }
+
 ?>
 
 <!DOCTYPE html>
