@@ -82,25 +82,16 @@ if (isset($_GET["name"]) and !empty($_GET["name"])) {
 
 
         <?php
-            //  $challnametmp = shell_exec("sudo docker ps -a --format 'table {{.Names}}\t{{.Status}}' | cut -f1 -d '(' | tail -n +2 | awk '{print $1}'");
+
             $challnametmp = shell_exec("sudo docker ps -a --format 'table {{.Names}}\t{{.Status}}' | cut -f1 -d '(' | tail -n +2 | awk '{print $1}'");
             $challstatus = shell_exec("sudo docker ps -a --format 'table {{.Names}}\t{{.Status}}' | cut -f1 -d '(' | tail -n +2 | awk '{print $2}'");
-            // $challport = shell_exec("sudo docker port ctfdlike | awk -F':' '{print \$NF}'");
-            $cnf1 = explode(PHP_EOL, $challnametmp);
-            $csf1 = explode(PHP_EOL, $challstatus);
 
-            $cnf = unset(end($cnf1));
-            $csf = unset(end($csf1));
-            // $cpf = explode(PHP_EOL, $challport);
+            $cnf = explode(PHP_EOL, $challnametmp);
+            $csf = explode(PHP_EOL, $challstatus);
 
 
-
-
-
-            //  foreach($cnf as $container) 
             foreach (array_combine($cnf, $csf) as $challnametmp => $challstatus) {
               ?>
-                <?php if($challname === ''){ echo("<p>pop</p>");}?>
                 <div class="card">
                 <div class="card-body">
                     <h4 class="card-title"><?php echo $challnametmp;?></h4>
