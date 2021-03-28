@@ -40,9 +40,7 @@ $username = $_SESSION['connected'];
 
 
         <?php
-
-
-            $challnametmp = shell_exec("sudo docker ps -a --format 'table {{.Names}}\t{{.Status}}' | cut -f1 -d '('";
+            $challnametmp = shell_exec("sudo docker ps -a --format 'table {{.Names}}\t{{.Status}}' | cut -f1 -d '('");
             $cs = explode(PHP_EOL, $challnametmp);
             foreach(array_slice($cs, 1) as $container) {
                 ?>

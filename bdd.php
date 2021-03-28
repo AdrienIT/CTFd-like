@@ -21,4 +21,3 @@ $pdo = new PDO(
     $database_password,
     $database_options
 );
-?>
