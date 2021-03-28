@@ -22,13 +22,13 @@ if (isset($_GET["name"]) and !empty($_GET["name"])) {
         var_dump($name,$action);
 
         if($action == 'start'){
-            // shell_exec("sudo docker start  `docker ps -a -q --filter 'name=".$name."'`");
-            echo "<script type='text/javascript'>alert('Start.');</script>";
+            shell_exec("sudo docker start  `docker ps -a -q --filter 'name=".$name."'`");
+            echo "<script type='text/javascript'>alert('Votre machine s'est arrétée.');</script>";
         }
 
         elseif($action == 'stop'){
-            // shell_exec("sudo docker stop ".$name);  
-            echo "<script type='text/javascript'>alert('stop.');</script>";
+            shell_exec("sudo docker stop ".$name);  
+            echo "<script type='text/javascript'>alert('Votre machine s'est arrétée.');</script>";
         }
         
         elseif($action == 'restart'){
