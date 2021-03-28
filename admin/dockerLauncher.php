@@ -112,7 +112,7 @@ if (isset($_GET["name"]) and !empty($_GET["name"])) {
                     <button><a href="dockerLauncher.php?name=<?=$challnametmp;?>&action=start">start</a></button>
                     <button><a href="dockerLauncher.php?name=<?=$challnametmp;?>&action=stop">stop</a></button>
                     <button><a href="dockerLauncher.php?name=<?=$challnametmp;?>&action=restart">restart</a></button>
-                    <?php if($challstatus === 'Exited'){ echo("<button><a href=\"dockerLauncher.php?name=$challnametmp&action=remove\">remove</a></button>");}?>
+                    <?php if($challstatus !=== 'Up'){ echo("<button><a href=\"dockerLauncher.php?name=$challnametmp&action=remove\">remove</a></button>");}?>
     
 
 
