@@ -6,6 +6,14 @@ if (!isset($_SESSION["connected"])) {
 }
 $username = $_SESSION['connected'];
 
+$querry_is_admin = $pdo->prepare('SELECT username from admin where username = :username');
+$querry_is_admin->bindParam(':username',$username);
+$querry_is_admin->execute();
+
+if($querry_is_admin->rowCount() == 0 ){
+    header('Location: ../login.php');
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -40,16 +48,19 @@ $username = $_SESSION['connected'];
 
 
         <?php
-            $challnametmp = shell_exec("sudo docker ps -a --format 'table {{.Names}}\t{{.Status}}' | cut -f1 -d '('");
+            // $challnametmp = shell_exec("sudo docker ps -a --format 'table {{.Names}}\t{{.Status}}' | cut -f1 -d '('");
+            $challnametmp = shell_exec("sudo docker ps -a --format 'table {{.Names}}' | cut -f1 -d '('");
             $cs = explode(PHP_EOL, $challnametmp);
             foreach(array_slice($cs, 1) as $container) {
+                $challstatus = shell_exec("sudo docker ps -a --format 'table {{.Status}}' | cut -f1 -d '('");
                 ?>
+                
                 <div class="card">
                 <div class="card-body">
                     <h4 class="card-title"><?php echo $container;?></h4>
                     <h6 class="text-muted card-subtitle mb-2"></h6>
-                    <button class="btn btn-primary active text-center d-block pull-right" type="button" style="height: 61px;background-color: rgb(0,105,217);"><a href="dockerAction.php?start=<?= $container; ?>">start</a></button>
-                    <button class="btn btn-primary active text-center d-block pull-right" type="button" style="height: 61px;background-color: rgb(0,105,217);"><a href="dockerAction.php?stop=<?= $container; ?>">stop</a></button>
+                    <button class="btn btn-primary active text-center d-block pull-right" type="button" style="height: 61px;background-color: rgb(0,105,217);"><a href="dockerAction.php?start=<?= $container;$challstatus; ?>">start</a></button>
+                    <button class="btn btn-primary active text-center d-block pull-right" type="button" style="height: 61px;background-color: rgb(0,105,217);"><a href="dockerAction.php?stop=<?= $container;$challstatus; ?>">stop</a></button>
                 </div>
             </div>
             <?php } ?>
