@@ -54,14 +54,12 @@ if($querry_is_admin->rowCount() == 0 ){
             $cnf = explode(PHP_EOL, $challnametmp);
             // $csf = explode(PHP_EOL, $challstatus);
 
-            $challnametmp = array(shell_exec("sudo docker ps -a --format 'table {{.Names}}' | cut -f1 -d '('");
-            $challstatus = array(shell_exec("sudo docker ps -a --format 'table {{.Status}}' | cut -f1 -d '('");
+            $challnametmp = array(shell_exec("sudo docker ps -a --format 'table {{.Names}}' | cut -f1 -d '('"));
+            $challstatus = array(shell_exec("sudo docker ps -a --format 'table {{.Status}}' | cut -f1 -d '('"));
 
-}
 
             // foreach(array_slice($cnf, 1) as $container) 
             foreach($challnametmp as $key => $value) {
-                echo "Code is: " . $challnametmp[$key] . " - " . "and Name: " . $challstatus[$key] . "<br>";{
                 ?>
                 
                 <div class="card">
