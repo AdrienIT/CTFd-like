@@ -17,9 +17,8 @@ if (isset ($_POST["connexion"])){
     $querry_is_admin->execute();
 
     if($querry_is_admin->rowCount() == 0 ){
-        echo('test');
-        // header('Location: ../login.php');
-        // exit;
+        header('Location: ../login.php');
+        exit;
     }
 
     $query_get_hash = $pdo->prepare("SELECT password FROM admin WHERE username = :username");
