@@ -48,8 +48,8 @@ $username = $_SESSION['connected'];
                 <div class="card-body">
                     <h4 class="card-title"><?php echo $container;?></h4>
                     <h6 class="text-muted card-subtitle mb-2"></h6>
-                    <p class="card-text"><button name="start">start</button> </p>
-                    <p class="card-text"><button name="stop">stop</button> </p>
+                    <p class="card-text"><button name="start"><a href="dockerAction.php?start=<?= $container; ?>">start</button> </p>
+                    <p class="card-text"><button name="stop"><a href="dockerAction.php?stop=<?= $container; ?>">stop</button> </p>
                 </div>
             </div>
             <?php } ?>
