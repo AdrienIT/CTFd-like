@@ -19,7 +19,7 @@ if (isset($_GET["name"]) and !empty($_GET["name"])) {
     if(isset($_GET["action"]) and !empty($_GET["action"])){
         $name = htmlspecialchars($_GET["name"]);
         $nameArray= explode(PHP_EOL, $challnametmp);
-        $new = shell_exec("sudo docker ps -a --format 'table {{.Names}}\t{{.Status}}' | cut -f1 -d '(' | tail -n +2 | awk '{print $1}' > psa");
+        $new = shell_exec("docker ps -a --format '{{.Names}}' > psa");
         if(strpos(file_get_contents($new),$name)!==false){
             // true
         }
