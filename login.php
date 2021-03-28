@@ -37,7 +37,7 @@ if (isset ($_POST["connexion"])){
         }
         if(password_verify($password,implode($AdminHash))){
             $_SESSION['connected'] = $username;
-            header('Location: ./users/home_users.php');
+            header('Location: ./admin/homeAdmin.php');
             exit;
         }
         else{
