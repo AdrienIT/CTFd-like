@@ -64,10 +64,10 @@ if($querry_is_admin->rowCount() == 0 ){
                 
                 <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title"><?php echo $container;?></h4>
-                    <h6 class="text-muted card-subtitle mb-2"></h6>
-                    <button class="btn btn-primary active text-center d-block pull-right" type="button" style="height: 61px;background-color: rgb(0,105,217);"><a href="dockerAction.php?start=<?= $$challnametmp[$key];$challstatus[$key]; ?>">start</a></button>
-                    <button class="btn btn-primary active text-center d-block pull-right" type="button" style="height: 61px;background-color: rgb(0,105,217);"><a href="dockerAction.php?stop=<?= $container; ?>">stop</a></button>
+                    <h4 class="card-title"><?php echo $challnametmp[$key];?></h4>
+                    <h6 class="text-muted card-subtitle mb-2"><?php echo $challstatus[$key];?></h6>
+                    <button class="btn btn-primary active text-center d-block pull-right" type="button" style="height: 61px;background-color: rgb(0,105,217);"><a href="dockerAction.php?start=<?= $challnametmp[$key];?>">start</a></button>
+                    <button class="btn btn-primary active text-center d-block pull-right" type="button" style="height: 61px;background-color: rgb(0,105,217);"><a href="dockerAction.php?stop=<?=  $challnametmp[$key]; ?>">stop</a></button>
                 </div>
             </div>
             <?php } ?>
