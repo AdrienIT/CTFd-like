@@ -18,7 +18,7 @@ if($querry_is_admin->rowCount() == 0 ){
 if (isset($_GET["name"]) and !empty($_GET["name"])) {
     if(isset($_GET["action"]) and !empty($_GET["action"])){
         $name = htmlspecialchars($_GET["name"]);
-        $nameArray= array($challnametmp);
+        $nameArray= explode(PHP_EOL, $challnametmp);
         var_dump($name,$nameArray);
 
         if (in_array($name,$nameArray)){
