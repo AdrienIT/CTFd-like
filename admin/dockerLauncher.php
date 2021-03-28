@@ -22,7 +22,7 @@ if (isset($_GET["name"]) and !empty($_GET["name"])) {
         var_dump($name,$action);
 
         if($action == 'start'){
-            shell_exec("sudo docker start  `docker ps -a -q --filter 'name=".$name."'`");
+            shell_exec("sudo docker start ".$name);
             echo "<script type='text/javascript'>alert('Votre machine s'est arrétée.');</script>";
         }
 
