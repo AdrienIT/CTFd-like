@@ -22,20 +22,20 @@ if (isset($_GET["name"]) and !empty($_GET["name"])) {
 
         if($action == 'start'){
             shell_exec("sudo docker start ".$name);
-            echo "<script type='text/javascript'>alert('Votre machine s'est arrétée.');</script>";
             header('Location: ./dockerLauncher.php');
             exit;
         }
 
         elseif($action == 'stop'){
             shell_exec("sudo docker stop ".$name);  
-            echo "<script type='text/javascript'>alert('Votre machine s'est arrétée.');</script>";
             header('Location: ./dockerLauncher.php');
             exit;
         }
         
         elseif($action == 'restart'){
-            //bonus  
+            shell_exec("sudo docker restart ".$name);  
+            header('Location: ./dockerLauncher.php');
+            exit;
         }
 
     }
@@ -79,22 +79,28 @@ if (isset($_GET["name"]) and !empty($_GET["name"])) {
             //  $challnametmp = shell_exec("sudo docker ps -a --format 'table {{.Names}}\t{{.Status}}' | cut -f1 -d '(' | tail -n +2 | awk '{print $1}'");
             $challnametmp = shell_exec("sudo docker ps -a --format 'table {{.Names}}\t{{.Status}}' | cut -f1 -d '(' | tail -n +2 | awk '{print $1}'");
             $challstatus = shell_exec("sudo docker ps -a --format 'table {{.Names}}\t{{.Status}}' | cut -f1 -d '(' | tail -n +2 | awk '{print $2}'");
+            //$challport = shell_exec("docker port ctfdlike | awk -F':' '{print $NF}'");
             $cnf = explode(PHP_EOL, $challnametmp);
             $csf = explode(PHP_EOL, $challstatus);
+            $cpf = explode(PHP_EOL, $challport);
+
 
 
 
 
             //  foreach($cnf as $container) 
-            foreach (array_combine($cnf, $csf) as $challnametmp => $challstatus) {
+            foreach (array_combine($cnf, $csf) as $challnametmp => $challstatus =>$challport) {
               ?>
                 
                 <div class="card">
                 <div class="card-body">
                     <h4 class="card-title"><?php echo $challnametmp;?></h4>
                     <h6 class="text-muted card-subtitle mb-2"><?php echo $challstatus;?></h6>
-                    <button class="btn btn-primary active text-center d-block pull-right" type="button" style="height: 61px;background-color: rgb(0,105,217);"><a href="dockerLauncher.php?name=<?=$challnametmp;?>&action=start">start</a></button>
-                    <button class="btn btn-primary active text-center d-block pull-right" type="button" style="height: 61px;background-color: rgb(0,105,217);"><a href="dockerLauncher.php?name=<?=$challnametmp; ?>&action=stop">stop</a></button>
+
+                    <h6 class="text-muted card-subtitle mb-2"><p>sur le port : </p><?php echo shell_exec("docker port ".$challnametmp." | awk -F':' '{print $NF}'");?></h6>
+                    <button><a href="dockerLauncher.php?name=<?=$challnametmp;?>&action=start">start</a></button>
+                    <button><a href="dockerLauncher.php?name=<?=$challnametmp; ?>&action=stop">stop</a></button>
+                    <button><a href="dockerLauncher.php?name=<?=$challnametmp; ?>&action=restart">restart</a></button>
                 </div>
             </div>
             <?php } ?>
