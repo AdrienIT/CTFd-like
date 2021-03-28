@@ -112,7 +112,7 @@ sudo docker rm -f $name
                     <button><a href="dockerLauncher.php?name=<?=$challnametmp;?>&action=start">start</a></button>
                     <button><a href="dockerLauncher.php?name=<?=$challnametmp; ?>&action=stop">stop</a></button>
                     <button><a href="dockerLauncher.php?name=<?=$challnametmp; ?>&action=restart">restart</a></button>
-                    <?php if($challstatus === 'Excited'){ echo("<button><a href=\"dockerLauncher.php?name=<?=$challnametmp; ?>&action=remove\">remove</a></button>");}?>
+                    <?php if($challstatus === 'Excited'){ echo("<button><a href=\"dockerLauncher.php?name=$challnametmp&action=remove\">remove</a></button>");}?>
 
 
                     
