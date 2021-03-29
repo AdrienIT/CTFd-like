@@ -55,17 +55,17 @@ if ($isVerif1 == true) {
         <nav class="navbar navbar-light navbar-expand-md sticky-top border rounded float-none navigation-clean-button"
             style="height: 80px;background-color: #37434d;color: #ffffff;">
             <div class="container-fluid">
-                <a class="navbar-brand" href="./home_users.php" style="filter: blur(0px);width: 182px;margin: -18px;">
+                <a class="navbar-brand" href="index.php" style="filter: blur(0px);width: 182px;margin: -18px;">
                     &nbsp;CTFD_Like
                 </a>
                 <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;" href="team.php">
                     <i class="fa fa-user" style="height: -5px;width: 13px;padding: 4px;"></i>Team</a>
 
-                <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;" href="challenge.php">
+                <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;" href="../chall.php">
                     <i class="fa fa-file-code-o" style="height: -5px;width: 18px;padding: 4px;"></i>Challenge</a>
 
                 <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;width: 80;margin: 0;"
-                    href="./profile_users.php">
+                    href="profile_users.php">
                     <i class="fa fa-address-card" style="height: -5px;width: 13px;padding: 4px;"></i> &nbsp; Profile</a>
 
                 <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;width: 80;margin: 0;"

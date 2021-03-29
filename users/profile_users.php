@@ -60,7 +60,7 @@ if (isset($_POST['totp'])) {
 
 
     header("Refresh:0");
-    exit;
+    exit();
 
     echo "<script type='text/javascript'>alert('le double authantification est maitenant activé');</script>";
 }
@@ -76,7 +76,7 @@ if (isset($_POST['no_totp'])) {
     $query_del_token->bindParam(':email', $user_mail);
     $query_del_token->execute();
     header("Refresh:0");
-    exit;
+    exit();
     echo "<script type='text/javascript'>alert('le double authantification est maitenant désactivé');</script>";
 }
 
@@ -110,7 +110,7 @@ if (isset($_POST['no_totp'])) {
 
         <nav class="navbar navbar-light navbar-expand-md sticky-top border rounded float-none navigation-clean-button"
             style="height: 80px;background-color: #37434d;color: #ffffff;">
-            <div class="container-fluid"><a class="navbar-brand" href="home_users.php"
+            <div class="container-fluid"><a class="navbar-brand" href="index.php"
                     style="filter: blur(0px);width: 182px;margin: -18px;">
                     &nbsp;CTFD_Like</a>
                 <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;" href="../logout.php">

@@ -101,10 +101,10 @@ if (isset(($_FILES["zip_file"]["name"]))) {
         <nav class="navbar navbar-light navbar-expand-md sticky-top border rounded float-none navigation-clean-button"
             style="height: 80px;background-color: #37434d;color: #ffffff;">
             <div class="container-fluid">
-                <a class="navbar-brand" href="../index.php"
+                <a class="navbar-brand" href="users/index.php"
                     style="filter: blur(0px);width: 182px;margin: -18px;">CTFD_like</a>
 
-                <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;" href="../logout.php">
+                <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;" href="logout.php">
                     <i class="fa fa-sign-in" style="height: -5px;width: 13px;padding: 4px;"></i>
                     &nbsp; LogOut
                 </a>

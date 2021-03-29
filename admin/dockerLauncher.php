@@ -7,7 +7,7 @@ if (!isset($_SESSION["admin_id"])) {
     header("Location: ../login.php");
 }
 
-$ip=shell_exec('curl ifconfig.me');
+$ip = shell_exec('curl ifconfig.me');
 
 //$ip = getHostByName($_SERVER['REMOTE_ADDR']);
 
@@ -64,7 +64,7 @@ if (isset($_GET["name"]) and !empty($_GET["name"])) {
 
         <nav class="navbar navbar-light navbar-expand-md sticky-top border rounded float-none navigation-clean-button"
             style="height: 80px;background-color: #37434d;color: #ffffff;">
-            <div class="container-fluid"><a class="navbar-brand" href="home_users.php"
+            <div class="container-fluid"><a class="navbar-brand" href="index.php"
                     style="filter: blur(0px);width: 182px;margin: -18px;">&nbsp;CTFD_Like</a>
 
                 <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;" href="../logout.php">

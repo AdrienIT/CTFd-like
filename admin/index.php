@@ -38,10 +38,9 @@ if (!isset($_SESSION["admin_id"])) {
         <nav class="navbar navbar-light navbar-expand-md sticky-top border rounded float-none navigation-clean-button"
             style="height: 80px;background-color: #37434d;color: #ffffff;">
             <div class="container-fluid">
-                <a class="navbar-brand" href="../admin/homeAdmin.php"
-                    style="filter: blur(0px);width: 182px;margin: -18px;">
+                <a class="navbar-brand" href="index.php" style="filter: blur(0px);width: 182px;margin: -18px;">
                     &nbsp;CTFD_Like</a>
-                <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;" href="../team.php">
+                <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;" href="../users/team.php">
                     <i class="fa fa-user" style="height: -5px;width: 13px;padding: 4px;"></i>Team</a>
                 <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;" href="./dockerLauncher.php">
                     <i class="fa fa-file-code-o" style="height: -5px;width: 18px;padding: 4px;"></i>Dashboard</a>
@@ -54,6 +53,7 @@ if (!isset($_SESSION["admin_id"])) {
             </div>
         </nav>
         <a href="dockerLauncher.php"><button>Dashboard</button></a>
+        <a href="../chall.php"><button>New Chall</button></a>
     </body>
 
 </html>
