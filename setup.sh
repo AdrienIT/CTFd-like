@@ -77,6 +77,9 @@ if ! [ -x "$(command -v borgbackup)" ]; then
   fi
 fi
 
+#change user and pass init pdo 
+sed -i "/\$database_user=/c\$database_user='$MYSQL_USER';" ./bdd.php
+sed -i "/\$database_password=/c\$database_password='$MYSQL_PASSWORD';" ./bdd.php
 
 #Check if netdata is installed
 if ! [ -x "$(command -v netdata)" ]; then

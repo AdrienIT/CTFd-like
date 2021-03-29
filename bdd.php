@@ -2,10 +2,8 @@
 $database_host = 'localhost';
 $database_port = '3306';
 $database_dbname = 'ctfdlike';
-$database_user = 'root';
-// $database_user = 'admin';
-// $database_password = 'P@ssw0rd';
-$database_password = '';
+$database_user='root';
+$database_password='';
 $database_charset = 'UTF8';
 $database_options = [
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
