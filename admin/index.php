@@ -2,7 +2,8 @@
 require '../bdd.php';
 
 if (!isset($_COOKIE["admin_cookie"])) {
-    header('Location: loginPhp.php');
+    header('Location: ./loginPhp.php');
+    exit;
 };
 
 ?>

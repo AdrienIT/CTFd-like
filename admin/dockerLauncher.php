@@ -12,6 +12,7 @@ if ($querry_is_admin->rowCount() == 0) {
     header('Location: ../login.php');
     exit;
 }
+$ip = $_SERVER['REMOTE_ADDR'];
 
 if (isset($_GET["name"]) and !empty($_GET["name"])) {
     if (isset($_GET["action"]) and !empty($_GET["action"])) {
@@ -71,7 +72,8 @@ if (isset($_GET["name"]) and !empty($_GET["name"])) {
 
                 <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;" href="../logout.php">
                     <i class="fa fa-sign-in" style="height: -5px;width: 13px;padding: 4px;"></i>
-                    &nbsp; LogOut</a>
+                    &nbsp; LogOut
+                </a>
         </nav>
 
 
@@ -95,7 +97,7 @@ if (isset($_GET["name"]) and !empty($_GET["name"])) {
                 <?php
                 $port = shell_exec("sudo docker port " . $challnametmp . "| awk -F':' '{print \$NF}'");
                 if ($challstatus === 'Up') {
-                    echo ("<h6>Url du lien : <a target=\"_blank\" href=\"http://146.59.150.242:$port \">URL</a></h6>");
+                    echo ("<h6>Url du lien : <a target=\"_blank\" href=\"$ip:$port \">URL</a></h6>");
                 }
                 ?>
 

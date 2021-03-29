@@ -2,7 +2,7 @@
 require '../bdd.php';
 
 if (isset($_COOKIE["admin_cookie"])) {
-    header('Location: homeAdmin.php');
+    header('Location: ./homeAdmin.php');
 };
 
 // $username = "admin"; //Remplacer par variable env dans .env

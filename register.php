@@ -2,7 +2,7 @@
 require './bdd.php';
 
 if (isset($_POST['home'])) {
-    header('Location: index.php');
+    header('Location: ./index.php');
 }
 
 
@@ -43,7 +43,7 @@ if (isset($_POST['create'])) {
 
             $to = $email;
             $subject = "véfication de compte";
-            $body = "http://localhost:8080/ctfd/verifToken.php?token=$token";
+            $body = "http://$ip:8080/ctfd/verifToken.php?token=$token";
             $headers = "From: <ctfdlike@gmail.com>" . "\r\n";
             mail($to, $subject, $body, $headers);
 
