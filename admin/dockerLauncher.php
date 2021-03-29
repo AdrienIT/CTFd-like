@@ -7,7 +7,9 @@ if (!isset($_SESSION["admin_id"])) {
     header("Location: ../login.php");
 }
 
-$ip = $_SERVER['REMOTE_ADDR'];
+$ip=shell_exec('curl ifconfig.me');
+
+//$ip = getHostByName($_SERVER['REMOTE_ADDR']);
 
 if (isset($_GET["name"]) and !empty($_GET["name"])) {
     if (isset($_GET["action"]) and !empty($_GET["action"])) {
@@ -74,8 +76,8 @@ if (isset($_GET["name"]) and !empty($_GET["name"])) {
 
         <?php
 
-    $challnametmp = shell_exec("sudo docker ps -a --format 'table {{.Names}}\t{{.Status}}' | cut -f1 -d '(' |  awk '{print $1}'");
-    $challstatus = shell_exec("sudo docker ps -a --format 'table {{.Names}}\t{{.Status}}' | cut -f1 -d '(' |  awk '{print $2}'");
+    $challnametmp = shell_exec("sudo docker ps -a --format 'table {{.Names}}\t{{.Status}}' | cut -f1 -d '(' |  awk '{print $1}' | tail -n +2");
+    $challstatus = shell_exec("sudo docker ps -a --format 'table {{.Names}}\t{{.Status}}' | cut -f1 -d '(' |  awk '{print $2}' |tail -n +2");
 
 
     $cnf = array_reverse(explode(PHP_EOL, $challnametmp));
@@ -93,7 +95,7 @@ if (isset($_GET["name"]) and !empty($_GET["name"])) {
                 <?php
                 $port = shell_exec("sudo docker port " . $challnametmp . "| awk -F':' '{print \$NF}'");
                 if ($challstatus === 'Up') {
-                    echo ("<h6>Url du lien : <a target=\"_blank\" href=\"$ip:$port \">URL</a></h6>");
+                    echo ("<h6>Url du lien : <a target=\"_blank\" href=\"http://$ip:$port \">URL</a></h6>");
                 }
                 ?>
 
