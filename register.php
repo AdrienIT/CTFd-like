@@ -1,6 +1,8 @@
 <?php
 require './bdd.php';
 
+$ip=shell_exec('curl ifconfig.me');
+
 if (isset($_POST['create'])) {
     if (empty($_POST['username']) or empty($_POST['password_1']) or empty($_POST["password_2"]) or empty($_POST["email"])) {
         echo "<script type='text/javascript'>alert('veuillez remplir tout les champs');</script>";
