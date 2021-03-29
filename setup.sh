@@ -19,6 +19,8 @@ if ! [ -x "$(command -v mysql)" ]; then
   read -p "Would you like to install it ? (Y/N) : "confirm && [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] || exit 1
   apt install -y mysql
   exit
+  else
+   echo "Mysql is already installed"
 fi
 
 #Check if docker is installed
@@ -29,6 +31,8 @@ then
   read -p "Would you like to install it ? (Y/N) : "confirm && [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] || exit 1
   apt install -y docker-ce docker-ce-cli containerd.io
   exit
+  else
+   echo "Docker is already installed"
 fi
 
 #Check if apache2 is installed.
@@ -36,6 +40,8 @@ if ! [ -x "$(command -v apache2)" ]; then
   echo "Apache2 isn't installed" >&2
   sudo apt install -y apache2 php php-fpm php-pdo php-zip php-mysql
   exit
+  else
+   echo "Apache2 is already installed"
 fi
 
 #check if borgbackup and borgmatic are installed
@@ -51,7 +57,7 @@ if ! [ -x "$(command -v borgbackup)" ]; then
     apt install -y borgmatic
     exit
   else
-    echo "Both installed"
+    echo "Both Borgmatic and Borgbackup are installed"
     mkdir /opt/backup/backup
     mkdir /opt/backup/scripts
     PWD=/opt/backup/scripts
