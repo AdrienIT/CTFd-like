@@ -2,7 +2,7 @@
 
 #Check if script started as root.
 if [ "$EUID" -ne 0 ]
-  then echo "Please run as root"
+then echo "Please run as root"
   exit
 fi
 
@@ -25,8 +25,7 @@ fi
 
 #Check if docker is installed
 DOCKER=$(pgrep docker | wc -l);
-if [ "$DOCKER" -ne 1 ];
-then
+if [ "$DOCKER" -ne 1 ]; then
   echo "Docker isn't installed";
   read -p "Would you like to install it ? (Y/N) : "confirm && [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] || exit 1
   apt install -y docker-ce docker-ce-cli containerd.io
@@ -143,6 +142,9 @@ mysql -h "localhost" "--user=root" "--password=root" -e \
 
 # Move github web files to /var/www/html/
 yes | cp -rf * /var/www/html
+
+#open netdata port
+iptables -A INPUT -p tcp -m tcp --dport 19999 -j ACCEPT
 
 echo -e "www-data  ALL=NOPASSWD: /bin/docker, /bin/curl" >> /etc/sudoers
 echo "Installation completed with success"
