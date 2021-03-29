@@ -1,7 +1,7 @@
 <?php
 require '../bdd.php';
 
-if (!isset($_COOKIE[$cookie_user])) {
+if (!isset($_COOKIE["user_cookie"])) {
     header('location: ../login.php');
 }
 
@@ -19,7 +19,7 @@ if (implode($isVerif) != '0') {
 
     // dit rien ça marche
 } else {
-    // echo "<script type='text/javascript'>alert('votre compte n'as pas été vérifié veuillez vérifié vos mail');</script>";
+    // echo "<script type='text/javascript'>alert('votre compte n'as pas été vérifié veuillez vérifier vos mail');</script>";
     header('Location: ../login.php');
 }
 
@@ -73,10 +73,6 @@ if (implode($isVerif) != '0') {
                     <i class="fa fa-sign-in" style="height: -5px;width: 13px;padding: 4px;"></i>&nbsp; LogOut</a>
             </div>
         </nav>
-
-
-
-
     </body>
 
 </html>

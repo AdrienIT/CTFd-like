@@ -1,11 +1,6 @@
 <?php
 require './bdd.php';
 
-$cookie_user = "connected";
-$cookie_value = 1;
-
-setcookie($cookie_user, $cookie_value, time() + 86400, "/", "localhost", TRUE, TRUE);
-
 if (isset($_POST["connexion"])) {
     $username = htmlspecialchars($_POST["username"]);
     $password = htmlspecialchars($_POST["password"]);
@@ -41,9 +36,9 @@ if (isset($_POST["connexion"])) {
             echo "<script type='text/javascript'>alert('Le nom d utilisateur ou le mot de passe ne correspondent pas.');</script>";
         }
         if (password_verify($password, implode($AdminHash))) {
-            $_SESSION['connected'] = $username;
+            setcookie("admin_cookie", "connected", time() + 86400, "/", "localhost", TRUE, TRUE);
             header('Location: ./admin/homeAdmin.php');
-            exit;
+            exit();
         } else {
             echo "<script type='text/javascript'>alert('Le nom d utilisateur ou le mot de passe ne correspondent pas.');</script>";
         }
@@ -54,9 +49,9 @@ if (isset($_POST["connexion"])) {
 
             if ($query_verif_username->rowCount() > 0) {
                 if ($isVerified = 1) {
-                    $_SESSION['connected'] = $username;
+                    setcookie("user_cookie", "connected", time() + 86400, "/", "localhost", TRUE, TRUE);
                     header('Location: ./users/home_users.php');
-                    exit;
+                    exit();
                 } else {
                     echo "<script type='text/javascript'>alert('Un email vous a été envoyé, merci de valider votre compte.');</script>";
                 }

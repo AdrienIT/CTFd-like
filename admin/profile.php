@@ -1,7 +1,7 @@
 <?php
 require '../bdd.php';
 
-if (!isset($_COOKIE[$cookie_admin])) {
+if (!isset($_COOKIE["admin_cookie"])) {
     header('location: ../loginPhp.php');
 }
 

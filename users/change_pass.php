@@ -1,7 +1,7 @@
 <?php
 require_once('sendmail/class.phpmailer.php');
 require '../function/connexion_test.php';
-if (!isset($_COOKIE[$cookie_user])) {
+if (!isset($_COOKIE["user_cookie"])) {
     header('Location: ../login.php');
 }
 

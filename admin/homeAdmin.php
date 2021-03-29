@@ -1,9 +1,9 @@
 <?php
 require '../bdd.php';
 
-if (!isset($_COOKIE[$cookie_admin])) {
-    header('location: ../loginPhp.php');
-}
+if (!isset($_COOKIE["admin_cookie"])) {
+    header('Location: loginPhp.php');
+};
 
 ?>
 
@@ -36,12 +36,13 @@ if (!isset($_COOKIE[$cookie_admin])) {
         <nav class="navbar navbar-light navbar-expand-md sticky-top border rounded float-none navigation-clean-button"
             style="height: 80px;background-color: #37434d;color: #ffffff;">
             <div class="container-fluid">
-                <a class="navbar-brand" href="../homeAdmin.php" style="filter: blur(0px);width: 182px;margin: -18px;">
+                <a class="navbar-brand" href="../admin/homeAdmin.php"
+                    style="filter: blur(0px);width: 182px;margin: -18px;">
                     &nbsp;CTFD_Like</a>
                 <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;" href="../team.php">
                     <i class="fa fa-user" style="height: -5px;width: 13px;padding: 4px;"></i>Team</a>
                 <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;" href="./dockerLauncher.php">
-                    <i class="fa fa-file-code-o" style="height: -5px;width: 13px;padding: 4px;"></i>Challenge</a>
+                    <i class="fa fa-file-code-o" style="height: -5px;width: 18px;padding: 4px;"></i>Challenge</a>
                 <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;width: 80;margin: 0;"
                     href="./profile.php">
                     <i class="fa fa-address-card" style="height: -5px;width: 13px;padding: 4px;"></i> &nbsp; Profile</a>

@@ -1,14 +1,9 @@
 <?php
 require '../bdd.php';
 
-if (isset($_COOKIE[$cookie_admin])) {
+if (isset($_COOKIE["admin_cookie"])) {
     header('Location: homeAdmin.php');
 };
-
-$cookie_admin = "connected";
-$cookie_value = 1;
-
-setcookie($cookie_admin, $cookie_value, time() + 86400, "/", "localhost", TRUE, TRUE);
 
 // $username = "admin"; //Remplacer par variable env dans .env
 $xpassword = "root"; //Remplacer par variable env dans .env
@@ -36,7 +31,7 @@ if (isset($_POST["connexion"])) {
     $hash = $query_get_hash->fetch();
 
     if (password_verify($password, implode($hash))) {
-        $_SESSION['connected'] = $username;
+        setcookie("admin_cookie", "connected", time() + 86400, "/", "localhost", TRUE, TRUE);
         header('Location: ./homeAdmin.php');
         exit;
     } elseif (empty($hash)) {

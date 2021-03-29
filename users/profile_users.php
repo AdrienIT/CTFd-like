@@ -1,7 +1,7 @@
 <?php
 require '../bdd.php';
 
-if (!isset($$_COOKIE[$cookie_user])) {
+if (!isset($_COOKIE["user_cookie"])) {
     header('location: ../login.php');
 }
 
