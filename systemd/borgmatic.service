@@ -1,0 +1,9 @@
+[Unit]
+Description=borgmatic backup
+Wants=network-online.target
+After=network-online.target
+ConditionACPower=true
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/borgmatic --config /opt/backup/scripts/test.yaml --verbosity 1

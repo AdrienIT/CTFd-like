@@ -1,0 +1,23 @@
+location:
+    source_directories:
+        - /var/www/html
+
+    repositories:
+        - /opt/backup/backup
+
+retention:
+    keep_daily: 7
+    keep_weekly: 4
+    keep_monthly: 6
+
+consistency:
+    checks:
+        - repository
+        - archives
+
+hooks:
+    after_backup:
+        - $PWD/succesbackup.sh
+
+    on_error:
+        - $PWD/errorbackup.sh

@@ -1,20 +1,23 @@
 #!/bin/bash
 
-#Get variables from .env files
-set -o allexport
-source .env
-set +o allexport
-
-
 #Check if script started as root.
 if [ "$EUID" -ne 0 ]
   then echo "Please run as root"
   exit
 fi
 
+#Get variables from .env files
+set -o allexport
+source .env
+set +o allexport
+
+
+
 #Check if mysql is installed
 if ! [ -x "$(command -v mysql)" ]; then
   echo "Mysql isn't installed" >&2
+  read -p "Would you like to install it ? (Y/N) : "confirm && [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] || exit 1
+  apt install -y mysql
   exit
 fi
 
@@ -22,16 +25,53 @@ fi
 DOCKER=$(pgrep docker | wc -l);
 if [ "$DOCKER" -ne 1 ];
 then
-        echo "Docker isn't installed";
-        #sudo service mysql start
-        exit
+  echo "Docker isn't installed";
+  read -p "Would you like to install it ? (Y/N) : "confirm && [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] || exit 1
+  apt install -y docker-ce docker-ce-cli containerd.io
+  exit
 fi
 
 #Check if apache2 is installed.
 if ! [ -x "$(command -v apache2)" ]; then
   echo "Apache2 isn't installed" >&2
+  sudo apt install -y apache2 php php-fpm php-pdo php-zip php-mysql
   exit
 fi
+
+#check if borgbackup and borgmatic are installed
+if ! [ -x "$(command -v borgbackup)" ]; then
+  echo "borgbackup isn't installed" >&2
+  read -p "Would you like to install it ? (Y/N) : "confirm && [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] || exit 1
+  apt install -y borgbackup
+  exit
+  else
+  if ! [ -x "$(command -v borgmatic)" ]; then
+    echo "borgmatic isn't installed" >&2
+    read -p "Would you like to install it ? (Y/N) : "confirm && [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] || exit 1
+    apt install -y borgmatic
+    exit
+  else
+    echo "Both installed"
+    mkdir /opt/backup/backup
+    mkdir /opt/backup/scripts
+    PWD=/opt/backup/scripts
+    /usr/bin/borg init -e none /opt/backup/backup
+    mv ./test.yaml /opt/backup/scripts/
+    mv ./successbackup.sh /opt/backup/scripts/
+    mv ./errorbackup.sh /opt/backup/scripts/
+    read -p "Enter discord webhook for backups alerts: " discordwebhook
+    sed -i "/url=/c\url='$discordwebhook" /usr/lib/netdata/conf.d/health_alarm_notify.conf  /opt/backup/scripts/successbackup.sh
+    sed -i "/url=/c\url='$discordwebhook" /usr/lib/netdata/conf.d/health_alarm_notify.conf  /opt/backup/scripts/errorbackup.sh
+    chmod +x /opt/backup/scripts/successbackup.sh
+    chmod +x /opt/backup/scripts/errorbackup.sh
+
+    mv ./systemd/borgmatic.timer /etc/systemd/system/borgmatic.timer
+    mv ./systemd/borgmatic.service /etc/systemd/system/borgmatic.service
+
+    systemctl daemon-reload
+  fi
+fi
+
 
 #Check if netdata is installed
 if ! [ -x "$(command -v netdata)" ]; then
@@ -96,9 +136,10 @@ mysql -h "localhost" "--user=root" "--password=root" -e \
 	"FLUSH PRIVILEGES;"
 
 # Move github web files to /var/www/html/
+yes | cp -rf * /var/www/html
 
-
-echo "success on sql"
+echo -e "www-data  ALL=NOPASSWD: /bin/docker, /bin/curl" >> /etc/sudoers
+echo "Installation completed with success"
 
 #echo "ça work"
 
