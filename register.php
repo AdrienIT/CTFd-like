@@ -1,6 +1,8 @@
 <?php
 require './bdd.php';
 
+$ip=shell_exec('curl ifconfig.me');
+
 if (isset($_POST['create'])) {
     if (empty($_POST['username']) or empty($_POST['password_1']) or empty($_POST["password_2"]) or empty($_POST["email"])) {
         echo "<script type='text/javascript'>alert('veuillez remplir tout les champs');</script>";
@@ -36,7 +38,7 @@ if (isset($_POST['create'])) {
 
             $to = $email;
             $subject = "véfication de compte";
-            $body = "http://$ip:8080/ctfd/verifToken.php?token=$token";
+            $body = "http://$ip:8080/verifToken.php?token=$token";
             $headers = "From: <ctfdlike@gmail.com>" . "\r\n";
             mail($to, $subject, $body, $headers);
 
