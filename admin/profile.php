@@ -1,8 +1,10 @@
 <?php
 require '../bdd.php';
 
-if (!isset($_COOKIE["admin_cookie"])) {
-    header('location: ../loginPhp.php');
+session_start();
+
+if (!isset($_SESSION["admin_id"])) {
+    header("Location: ../login.php");
 }
 
 if (isset($_POST['change_pass'])) {

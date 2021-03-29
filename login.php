@@ -1,5 +1,17 @@
 <?php
 require './bdd.php';
+session_start();
+
+if (isset($_SESSION["users_id"])) {
+    header("Location: users/index.php");
+}
+
+$id = (int) $_SESSION["users_id"];
+
+$query_get_id = $pdo->prepare("SELECT * FROM users WHERE users_id = :id ");
+$query_get_id->bindParam(":id", $id);
+$query_get_id->execute();
+$user = $query_get_id->fetch();
 
 if (isset($_POST["connexion"])) {
     $username = htmlspecialchars($_POST["username"]);
@@ -36,7 +48,6 @@ if (isset($_POST["connexion"])) {
             echo "<script type='text/javascript'>alert('Le nom d utilisateur ou le mot de passe ne correspondent pas.');</script>";
         }
         if (password_verify($password, implode($AdminHash))) {
-            setcookie("admin_cookie", "connected", time() + 86400, "/", "localhost", TRUE, TRUE);
             header('Location: ./admin/index.php');
             exit();
         } else {
@@ -48,8 +59,8 @@ if (isset($_POST["connexion"])) {
         } elseif (password_verify($password, implode($hash))) {
 
             if ($query_verif_username->rowCount() > 0) {
-                if ($isVerified = 1) {
-                    setcookie("user_cookie", "connected", time() + 86400, "/", "localhost", TRUE, TRUE);
+                if ($isVerified = '1') {
+                    $_SESSION['users_id'] = (int) $user["users_id"];
                     header('Location: ./users/index.php');
                     exit();
                 } else {

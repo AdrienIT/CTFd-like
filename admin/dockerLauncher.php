@@ -1,17 +1,12 @@
 <?php
 require '../bdd.php';
-if (!isset($_COOKIE["admin_cookie"])) {
-    header('location: ../loginPhp.php');
+
+session_start();
+
+if (!isset($_SESSION["admin_id"])) {
+    header("Location: ../login.php");
 }
 
-$querry_is_admin = $pdo->prepare('SELECT username from admin where username = :username');
-$querry_is_admin->bindParam(':username', $username);
-$querry_is_admin->execute();
-
-if ($querry_is_admin->rowCount() == 0) {
-    header('Location: ../login.php');
-    exit;
-}
 $ip = $_SERVER['REMOTE_ADDR'];
 
 if (isset($_GET["name"]) and !empty($_GET["name"])) {
@@ -79,14 +74,15 @@ if (isset($_GET["name"]) and !empty($_GET["name"])) {
 
         <?php
 
-    $challnametmp = shell_exec("sudo docker ps -a --format 'table {{.Names}}\t{{.Status}}' | cut -f1 -d '(' | tail -n +2 | awk '{print $1}'");
-    $challstatus = shell_exec("sudo docker ps -a --format 'table {{.Names}}\t{{.Status}}' | cut -f1 -d '(' | tail -n +2 | awk '{print $2}'");
-
-    $cnf = explode(PHP_EOL, $challnametmp);
-    $csf = explode(PHP_EOL, $challstatus);
+    $challnametmp = shell_exec("sudo docker ps -a --format 'table {{.Names}}\t{{.Status}}' | cut -f1 -d '(' |  awk '{print $1}'");
+    $challstatus = shell_exec("sudo docker ps -a --format 'table {{.Names}}\t{{.Status}}' | cut -f1 -d '(' |  awk '{print $2}'");
 
 
-    foreach (array_combine($cnf, $csf) as $challnametmp => $challstatus) {
+    $cnf = array_reverse(explode(PHP_EOL, $challnametmp));
+    $csf = array_reverse(explode(PHP_EOL, $challstatus));
+
+
+    foreach (array_combine(array_slice($cnf, 1), array_slice($csf, 1)) as $challnametmp => $challstatus) {
     ?>
         <div class="card">
             <div class="card-body">

@@ -1,10 +1,11 @@
 <?php
 require '../bdd.php';
 
-if (!isset($_COOKIE["admin_cookie"])) {
-    header('Location: ./loginPhp.php');
-    exit;
-};
+session_start();
+
+if (!isset($_SESSION["admin_id"])) {
+    header("Location: ../login.php");
+}
 
 ?>
 
@@ -43,7 +44,7 @@ if (!isset($_COOKIE["admin_cookie"])) {
                 <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;" href="../team.php">
                     <i class="fa fa-user" style="height: -5px;width: 13px;padding: 4px;"></i>Team</a>
                 <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;" href="./dockerLauncher.php">
-                    <i class="fa fa-file-code-o" style="height: -5px;width: 18px;padding: 4px;"></i>Challenge</a>
+                    <i class="fa fa-file-code-o" style="height: -5px;width: 18px;padding: 4px;"></i>Dashboard</a>
                 <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;width: 80;margin: 0;"
                     href="./profile.php">
                     <i class="fa fa-address-card" style="height: -5px;width: 13px;padding: 4px;"></i> &nbsp; Profile</a>
@@ -52,6 +53,7 @@ if (!isset($_COOKIE["admin_cookie"])) {
                     <i class="fa fa-sign-in" style="height: -5px;width: 13px;padding: 4px;"></i>&nbsp; LogOut</a>
             </div>
         </nav>
+        <a href="dockerLauncher.php"><button>Dashboard</button></a>
     </body>
 
 </html>

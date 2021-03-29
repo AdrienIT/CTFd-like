@@ -1,7 +1,9 @@
 <?php
 require_once('sendmail/class.phpmailer.php');
-if (!isset($_COOKIE["user_cookie"])) {
-    header('Location: ../login.php');
+session_start();
+
+if (!isset($_SESSION["users_id"])) {
+    header("Location: ../login.php");
 }
 
 require '../bdd.php';

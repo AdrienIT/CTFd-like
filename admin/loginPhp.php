@@ -1,14 +1,21 @@
 <?php
 require '../bdd.php';
 
-if (isset($_COOKIE["admin_cookie"])) {
-    header('Location: ./homeAdmin.php');
-};
+session_start();
+
+if (isset($_SESSION["admin_id"])) {
+    header("Location: index.php");
+}
 
 // $username = "admin"; //Remplacer par variable env dans .env
 $xpassword = "root"; //Remplacer par variable env dans .env
 
+$id = (int) $_SESSION["admin_id"];
 
+$query_get_id = $pdo->prepare("SELECT * FROM admin WHERE admin_id = :id ");
+$query_get_id->bindParam(":id", $id);
+$query_get_id->execute();
+$admin = $query_get_id->fetch();
 
 if (isset($_POST["connexion"])) {
     $username = htmlspecialchars($_POST["username"]);
@@ -31,8 +38,8 @@ if (isset($_POST["connexion"])) {
     $hash = $query_get_hash->fetch();
 
     if (password_verify($password, implode($hash))) {
-        setcookie("admin_cookie", "connected", time() + 86400, "/", "localhost", TRUE, TRUE);
-        header('Location: ./homeAdmin.php');
+        $_SESSION["admin_id"] = (int) $admin["admin_id"];
+        header('Location: ./index.php');
         exit;
     } elseif (empty($hash)) {
         echo "<script type='text/javascript'>alert('Le nom d utilisateur ou le mot de passe ne correspondent pas.');</script>";

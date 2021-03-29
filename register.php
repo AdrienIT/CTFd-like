@@ -1,11 +1,6 @@
 <?php
 require './bdd.php';
 
-if (isset($_POST['home'])) {
-    header('Location: ./index.php');
-}
-
-
 if (isset($_POST['create'])) {
     if (empty($_POST['username']) or empty($_POST['password_1']) or empty($_POST["password_2"]) or empty($_POST["email"])) {
         echo "<script type='text/javascript'>alert('veuillez remplir tout les champs');</script>";
@@ -25,8 +20,6 @@ if (isset($_POST['create'])) {
 
         $query_verif_user_admin = $pdo->prepare("SELECT username from admin where username = ?");
         $query_verif_user_admin->execute([$username]);
-
-
 
         $query_verif_mail = $pdo->prepare("SELECT email from users where email = ?");
         $query_verif_mail->execute([$email]);

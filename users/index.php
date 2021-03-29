@@ -1,26 +1,26 @@
 <?php
 require '../bdd.php';
+session_start();
 
-if (!isset($_COOKIE["user_cookie"])) {
-    header('location: ../login.php');
+if (!isset($_SESSION["users_id"])) {
+    header("Location: ../login.php");
 }
 
 $querryIsVerif = $pdo->prepare('SELECT isVerified from users where username = :username');
 $querryIsVerif->bindParam(':username', $username);
 $querryIsVerif->execute();
-$isVerif = $querryIsVerif->fetch();
+$isVerif1 = $querryIsVerif->fetch();
+$isVerif = (int) $isVerif1;
+
 
 $querry_get_id = $pdo->prepare('SELECT users_id from users where username = :username');
 $querry_get_id->bindParam(':username', $username);
 $querry_get_id->execute();
 $user_id = $querry_get_id->fetch();
 
-if (implode($isVerif) != '0') {
-
-    // dit rien ça marche
-} else {
-    // echo "<script type='text/javascript'>alert('votre compte n'as pas été vérifié veuillez vérifier vos mail');</script>";
+if ($isVerif1 == true) {
     header('Location: ../login.php');
+    var_dump($isVerif1, $isVerif);
 }
 
 
@@ -62,7 +62,7 @@ if (implode($isVerif) != '0') {
                     <i class="fa fa-user" style="height: -5px;width: 13px;padding: 4px;"></i>Team</a>
 
                 <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;" href="challenge.php">
-                    <i class="fa fa-file-code-o" style="height: -5px;width: 13px;padding: 4px;"></i>Challenge</a>
+                    <i class="fa fa-file-code-o" style="height: -5px;width: 18px;padding: 4px;"></i>Challenge</a>
 
                 <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;width: 80;margin: 0;"
                     href="./profile_users.php">

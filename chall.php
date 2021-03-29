@@ -1,5 +1,10 @@
 <?php
 
+session_start();
+
+if (!isset($_SESSION["admin_id"])) {
+    header("Location: ../login.php");
+}
 
 function rmdir_recursive($dir)
 {
@@ -96,22 +101,12 @@ if (isset(($_FILES["zip_file"]["name"]))) {
         <nav class="navbar navbar-light navbar-expand-md sticky-top border rounded float-none navigation-clean-button"
             style="height: 80px;background-color: #37434d;color: #ffffff;">
             <div class="container-fluid">
-                <a class="navbar-brand" href="index.php"
+                <a class="navbar-brand" href="../index.php"
                     style="filter: blur(0px);width: 182px;margin: -18px;">CTFD_like</a>
-                <button class="navbar-toggler" data-toggle="collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
-
-                <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;" href="register.php">
-                    <i class="fa fa-sign-in" style="height: -5px;width: 18px;padding: 4px;"></i>
-                      Register
-                </a>
-                <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;width: 80;margin: 0;"
-                    href="login.php">
-                    <i class="fa fa-sign-in" style="height: -5px;width: 18px;padding: 4px;"></i> 
-                    Login
+                <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;" href="../logout.php">
+                    <i class="fa fa-sign-in" style="height: -5px;width: 13px;padding: 4px;"></i>
+                    &nbsp; LogOut
                 </a>
             </div>
         </nav>

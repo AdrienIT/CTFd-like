@@ -1,8 +1,10 @@
 <?php
 require '../bdd.php';
 
-if (!isset($_COOKIE["user_cookie"])) {
-    header('location: ../login.php');
+session_start();
+
+if (!isset($_SESSION["users_id"])) {
+    header("Location: ../login.php");
 }
 
 $querry_get_info = $pdo->prepare("SELECT email FROM users WHERE username = :username");
