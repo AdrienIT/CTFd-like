@@ -53,7 +53,7 @@ if (!isset($_SESSION["admin_id"])) {
             </div>
         </nav>
         <a href="dockerLauncher.php"><button>Dashboard</button></a>
-        <a href="../chall.php"><button>New Chall</button></a>
+        <a href="../docker.php"><button>New Chall</button></a>
     </body>
 
 </html>

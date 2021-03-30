@@ -61,7 +61,7 @@ if ($isVerif1 == true) {
                 <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;" href="team.php">
                     <i class="fa fa-user" style="height: -5px;width: 13px;padding: 4px;"></i>Team</a>
 
-                <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;" href="../chall.php">
+                <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;" href="../docker.php">
                     <i class="fa fa-file-code-o" style="height: -5px;width: 18px;padding: 4px;"></i>Challenge</a>
 
                 <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;width: 80;margin: 0;"
