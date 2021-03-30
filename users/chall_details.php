@@ -27,7 +27,7 @@ if (isset($_POST['submit'])) {
     $flaguser = $_POST['flag'];
     if ($flaguser = $flag) {
         echo "<script type='text/javascript'>alert('GOOD JOB');</script>";
-        header('location: challenges.php');
+        //header('location: challenges.php');
     } else {
         echo "<script type='text/javascript'>alert('Not the good flag');</script>";
     }

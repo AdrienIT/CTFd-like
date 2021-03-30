@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
     if($hint == "") {
         $hint = NULL;
     }
-    var_dump($data, $hint);
+    //var_dump($data, $hint);
     $flag =htmlspecialchars($_POST['flag']);//required
 
     $query_add_chall = $pdo->prepare("INSERT INTO challenges(name,categorie,description,data,hint,flag) VALUES(:name, :categorie, :description, :data, :hint, :flag)");

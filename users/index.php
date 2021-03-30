@@ -20,7 +20,7 @@ $user_id = $querry_get_id->fetch();
 
 if ($isVerif1 == true) {
     header('Location: ../login.php');
-    var_dump($isVerif1, $isVerif);
+    //($isVerif1, $isVerif);
 }
 
 
