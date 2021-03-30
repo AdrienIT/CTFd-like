@@ -1,10 +1,10 @@
 <?php
 require '../bdd.php';
-/* session_start();
+session_start();
 
 if (!isset($_SESSION["users_id"])) {
     header("Location: ../login.php");
-} */
+}
 
 if (isset($_GET['id']) && !empty($_GET['id'])) {
     $id = $_GET['id'];

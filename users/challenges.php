@@ -1,10 +1,10 @@
 <?php
 require '../bdd.php';
-/* session_start();
+session_start();
 
 if (!isset($_SESSION["users_id"])) {
     header("Location: ../login.php");
-} */
+}
 
 $query_dump_challs = $pdo->prepare('SELECT * from challenges');
 $query_dump_challs->execute();
