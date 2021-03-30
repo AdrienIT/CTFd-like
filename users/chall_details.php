@@ -8,7 +8,7 @@ if (!isset($_SESSION["users_id"])) {
 
 if (isset($_GET['id']) && !empty($_GET['id'])) {
     $id = $_GET['id'];
-    echo '<h1>'.$id.'</h1>';
+    //echo '<h1>'.$id.'</h1>';
 }
 
 
