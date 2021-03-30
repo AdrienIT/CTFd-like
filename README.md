@@ -15,9 +15,9 @@ chmod +x setup.sh
 sudo ./setup.sh
 
 Step3
-http://localhost:8080/
+http://localhost/
 OR
-http://$IP:8080/
+http://$IP/
 ```
 
 ## Contributors 
