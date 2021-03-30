@@ -136,7 +136,7 @@ fi
 #Executing sql commands
 mysql -h "localhost" "--user=root" "--password=root" -e \
 	"SET PASSWORD FOR 'root'@'localhost' = PASSWORD('$MYSQL_ROOT_PASSWORD');" -e \
-	"CREATE DATABASE ctfdlike CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_unicode_ci';" -e \
+	"CREATE DATABASE IF NOT EXISTS ctfdlike CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_unicode_ci';" -e \
 	"USE ctfdlike;" -e \
 	"CREATE TABLE \`users\` (\`users_id\` int NOT NULL AUTO_INCREMENT,\`username\` varchar(50) NOT NULL,\`password\` varchar(255) NOT NULL,\`email\` varchar(50) DEFAULT NULL,\`token\` varchar(50) DEFAULT NULL,\`isVerified\` boolean default false, PRIMARY KEY (\`users_id\`),UNIQUE KEY \`username\` (\`username\`),UNIQUE KEY \`email\` (\`email\`));" -e \
 	"CREATE TABLE \`admin\` (\`admin_id\` int NOT NULL AUTO_INCREMENT,\`username\` varchar(50) NOT NULL,\`password\` varchar(255) NOT NULL, PRIMARY KEY (\`admin_id\`),UNIQUE KEY \`username\` (\`username\`));" -e \
