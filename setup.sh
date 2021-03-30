@@ -138,9 +138,9 @@ mysql -h "localhost" "--user=root" "--password=root" -e \
 	"SET PASSWORD FOR 'root'@'localhost' = PASSWORD('$MYSQL_ROOT_PASSWORD');" -e \
 	"CREATE DATABASE IF NOT EXISTS ctfdlike CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_unicode_ci';" -e \
 	"USE ctfdlike;" -e \
-	"CREATE TABLE IF NOT EXISTS \`users\` (\`users_id\` int NOT NULL AUTO_INCREMENT,\`username\` varchar(50) NOT NULL,\`password\` varchar(255) NOT NULL,\`email\` varchar(50) DEFAULT NULL,\`token\` varchar(50) DEFAULT NULL,\`isVerified\` boolean default false, PRIMARY KEY (\`users_id\`),UNIQUE KEY \`username\` (\`username\`),UNIQUE KEY \`email\` (\`email\`));" -e \
-	"CREATE TABLE IF NOT EXISTS \`admin\` (\`admin_id\` int NOT NULL AUTO_INCREMENT,\`username\` varchar(50) NOT NULL,\`password\` varchar(255) NOT NULL, PRIMARY KEY (\`admin_id\`),UNIQUE KEY \`username\` (\`username\`));" -e \
-  "CREATE TABLE IF NOT EXISTS \`challenges\` (\`id\` int(11) NOT NULL,\`name\` varchar(255) NOT NULL,\`categorie\` varchar(255) NOT NULL,\`description\` text NOT NULL,\`data\` text,\`hint\` text,\`flag\` text NOT NULL)" -e \
+	"CREATE TABLE \`users\` (\`users_id\` int NOT NULL AUTO_INCREMENT,\`username\` varchar(50) NOT NULL,\`password\` varchar(255) NOT NULL,\`email\` varchar(50) DEFAULT NULL,\`token\` varchar(50) DEFAULT NULL,\`isVerified\` boolean default false, PRIMARY KEY (\`users_id\`),UNIQUE KEY \`username\` (\`username\`),UNIQUE KEY \`email\` (\`email\`));" -e \
+	"CREATE TABLE \`admin\` (\`admin_id\` int NOT NULL AUTO_INCREMENT,\`username\` varchar(50) NOT NULL,\`password\` varchar(255) NOT NULL, PRIMARY KEY (\`admin_id\`),UNIQUE KEY \`username\` (\`username\`));" -e \
+  "CREATE TABLE \`challenges\` (\`id\` int(11) NOT NULL,\`name\` varchar(255) NOT NULL,\`categorie\` varchar(255) NOT NULL,\`description\` text NOT NULL,\`data\` text,\`hint\` text,\`flag\` text NOT NULL)" -e \
 	"INSERT INTO admin (username, password) VALUES('$ADMIN_USER','$BCRYPTPASSWD');" -e \
 	"FLUSH PRIVILEGES;"
 
