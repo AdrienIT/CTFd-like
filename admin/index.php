@@ -44,6 +44,8 @@ if (!isset($_SESSION["admin_id"])) {
                     <i class="fa fa-user" style="height: -5px;width: 13px;padding: 4px;"></i>Team</a>
                 <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;" href="./dockerLauncher.php">
                     <i class="fa fa-file-code-o" style="height: -5px;width: 18px;padding: 4px;"></i>Dashboard</a>
+                <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;" href="./chall.php">
+                    <i class="fa fa-file-code-o" style="height: -5px;width: 18px;padding: 4px;"></i>New challenge</a>
                 <a class="d-xl-flex justify-content-xl-end" style="color: #ffffff;width: 80;margin: 0;"
                     href="./profile.php">
                     <i class="fa fa-address-card" style="height: -5px;width: 13px;padding: 4px;"></i> &nbsp; Profile</a>
@@ -53,7 +55,8 @@ if (!isset($_SESSION["admin_id"])) {
             </div>
         </nav>
         <a href="dockerLauncher.php"><button>Dashboard</button></a>
-        <a href="../docker.php"><button>New Chall</button></a>
+        <a href="../docker.php"><button>New Docker</button></a>
+        <a href="chall.php"><button>New Challenge</button></a>
     </body>
 
 </html>
