@@ -140,7 +140,9 @@ mysql -h "localhost" "--user=root" "--password=root" -e \
 	"USE ctfdlike;" -e \
 	"CREATE TABLE \`users\` (\`users_id\` int NOT NULL AUTO_INCREMENT,\`username\` varchar(50) NOT NULL,\`password\` varchar(255) NOT NULL,\`email\` varchar(50) DEFAULT NULL,\`token\` varchar(50) DEFAULT NULL,\`isVerified\` boolean default false, PRIMARY KEY (\`users_id\`),UNIQUE KEY \`username\` (\`username\`),UNIQUE KEY \`email\` (\`email\`));" -e \
 	"CREATE TABLE \`admin\` (\`admin_id\` int NOT NULL AUTO_INCREMENT,\`username\` varchar(50) NOT NULL,\`password\` varchar(255) NOT NULL, PRIMARY KEY (\`admin_id\`),UNIQUE KEY \`username\` (\`username\`));" -e \
-  "CREATE TABLE \`challenges\` (\`id\` int(11) NOT NULL,\`name\` varchar(255) NOT NULL,\`categorie\` varchar(255) NOT NULL,\`description\` text NOT NULL,\`data\` text,\`hint\` text,\`flag\` text NOT NULL)" -e \
+  "CREATE TABLE \`challenges\` (\`id\` int(11) NOT NULL,\`name\` varchar(255) NOT NULL,\`categorie\` varchar(255) NOT NULL,\`description\` text NOT NULL,\`data\` text,\`hint\` text,\`flag\` text NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;" -e \
+  "ALTER TABLE \`challenges\` MODIFY \`id\` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;" -e \
+  "ALTER TABLE \`challenges\` AND PRIMARY KEY (\`id\`);" -e \
 	"INSERT INTO admin (username, password) VALUES('$ADMIN_USER','$BCRYPTPASSWD');" -e \
 	"FLUSH PRIVILEGES;"
 
